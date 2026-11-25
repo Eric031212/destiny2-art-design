@@ -240,47 +240,105 @@
     svg.innerHTML = s;
   })();
 
-  /* ================= expansions ================= */
-  (function expansions() {
-    var rail = $("#xpRail"), card = $("#xpCard"); if (!rail) return;
-    var cur = D.xp.findIndex(function (x) { return x.id === "finalshape"; });
-    function emblem(x) {
-      var p = x.pal, id = x.id, g = "";
-      var bg = '<defs><linearGradient id="xg-' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + p[0] + '"/><stop offset="1" stop-color="' + p[1] + '"/></linearGradient></defs><rect width="400" height="225" fill="url(#xg-' + id + ')"/>';
-      switch (id) {
-        case "redwar": g = '<circle cx="200" cy="80" r="44" fill="' + p[3] + '" opacity=".9"/><path d="M150 40 L200 80 L250 40 M150 120 L200 80 L250 120" stroke="' + p[2] + '" stroke-width="7" fill="none"/><path d="M0 225 L60 170 L120 190 L180 160 L260 195 L330 165 L400 190 V225Z" fill="' + p[0] + '"/>'; break;
-        case "osiris": g = ""; for (var i = 0; i < 7; i++) for (var j = 0; j < 4; j++) g += '<rect x="' + (40 + i * 48) + '" y="' + (60 + j * 36 + (i % 2) * 18) + '" width="30" height="8" fill="' + p[3] + '" opacity="' + (.2 + j * .2) + '"/>'; g += '<circle cx="200" cy="40" r="14" fill="none" stroke="' + p[2] + '" stroke-width="3"/>'; break;
-        case "warmind": g = '<path d="M0 225 V150 L80 130 L160 150 L240 125 L320 145 L400 130 V225Z" fill="' + p[2] + '" opacity=".75"/><rect x="150" y="60" width="100" height="90" fill="' + p[1] + '"/><rect x="185" y="30" width="30" height="40" fill="' + p[1] + '"/><rect x="160" y="80" width="80" height="6" fill="' + p[3] + '"/>'; break;
-        case "forsaken": g = '<path d="M0 225 V190 Q100 170 200 190 T400 185 V225Z" fill="' + p[0] + '"/>'; [[120, 80], [160, 40], [200, 15], [240, 50], [280, 90]].forEach(function (t) { g += '<polygon points="' + (t[0] - 12) + ',190 ' + t[0] + ',' + t[1] + ' ' + (t[0] + 12) + ',190" fill="' + p[2] + '" opacity=".85"/>'; }); g += '<circle cx="320" cy="50" r="18" fill="' + p[3] + '" opacity=".8"/>'; break;
-        case "shadowkeep": g = '<circle cx="200" cy="245" r="150" fill="#d9d2c1" opacity=".12"/><path d="M150 225 V120 L170 100 V60 L185 40 L200 20 L215 40 L230 60 V100 L250 120 V225Z" fill="' + p[2] + '"/><polygon points="170,225 200,180 230,225" fill="#000"/>'; break;
-        case "beyond": g = '<polygon points="60,225 120,90 180,225" fill="' + p[2] + '" opacity=".55"/><polygon points="150,225 230,40 310,225" fill="' + p[3] + '" opacity=".75"/><polygon points="260,225 320,110 380,225" fill="' + p[2] + '" opacity=".5"/><path d="M230 40 L230 225" stroke="' + p[1] + '" opacity=".6"/>'; break;
-        case "thirty": g = '<text x="200" y="140" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="96" fill="' + p[2] + '">30</text><circle cx="200" cy="112" r="80" fill="none" stroke="' + p[3] + '" stroke-opacity=".4"/>'; break;
-        case "witchqueen": g = '<path d="M0 225 V170 Q100 150 200 175 Q300 200 400 160 V225Z" fill="' + p[1] + '"/><path d="M200 30 C160 60 120 70 90 110 C140 105 170 120 200 150 C230 120 260 105 310 110 C280 70 240 60 200 30Z" fill="' + p[2] + '" opacity=".85"/><path d="M180 30 L190 10 L200 25 L210 10 L220 30" stroke="' + p[3] + '" stroke-width="2" fill="none"/>'; break;
-        case "lightfall": g = ""; for (var k = 0; k < 8; k++) { var hh = 60 + (k * 37 % 90); g += '<rect x="' + (30 + k * 45) + '" y="' + (225 - hh) + '" width="26" height="' + hh + '" fill="' + p[0] + '" stroke="' + (k % 2 ? p[2] : p[3]) + '" stroke-width="1.5"/>'; } g += '<circle cx="320" cy="50" r="26" fill="none" stroke="' + p[3] + '" stroke-width="2"/><path d="M0 70 C120 40 260 100 400 60" stroke="' + p[2] + '" fill="none" opacity=".6"/>'; break;
-        case "finalshape": g = '<path d="M0 225 C60 180 100 200 140 170 C170 150 160 120 190 110 L190 225Z" fill="#6c8a5a" opacity=".6"/><path d="M400 225 C340 190 300 205 260 175 C235 160 230 130 210 120 L210 225Z" fill="#6c8a5a" opacity=".45"/><rect x="190" y="18" width="20" height="207" fill="#000"/><circle cx="200" cy="60" r="38" fill="' + p[2] + '" opacity=".25"/><circle cx="200" cy="60" r="26" fill="' + p[2] + '" opacity=".9"/><rect x="190" y="18" width="20" height="207" fill="#000"/>'; break;
-        case "episodes": g = '<polygon points="80,170 120,100 160,170" fill="none" stroke="' + p[2] + '" stroke-width="2"/><circle cx="200" cy="135" r="34" fill="none" stroke="' + p[3] + '" stroke-width="2"/><path d="M250 170 L290 100 L330 170 Z M270 135 H310" stroke="' + p[1] + '" stroke-width="2" fill="none"/>'; break;
-        case "edgeoffate": g = '<circle cx="200" cy="112" r="56" fill="none" stroke="' + p[2] + '" stroke-width="2"/><ellipse cx="200" cy="112" rx="120" ry="26" fill="none" stroke="' + p[3] + '" stroke-opacity=".6"/><circle cx="200" cy="112" r="18" fill="' + p[3] + '"/>'; for (var q = 0; q < 9; q++) { var a = q / 9 * 6.283; g += '<circle cx="' + (200 + Math.cos(a) * 90).toFixed(0) + '" cy="' + (112 + Math.sin(a) * 90 * .4).toFixed(0) + '" r="2" fill="' + p[2] + '"/>'; } break;
-        case "renegades": g = '<path d="M0 225 V185 H400 V225Z" fill="' + p[1] + '"/><circle cx="150" cy="70" r="22" fill="' + p[2] + '"/><circle cx="215" cy="85" r="14" fill="' + p[3] + '" opacity=".8"/><path d="M60 185 L120 150 H280 L340 185" fill="none" stroke="' + p[3] + '" stroke-width="2"/>'; break;
-      }
-      return '<svg viewBox="0 0 400 225" role="img" aria-label="Original abstract emblem">' + bg + g + "</svg>";
-    }
+  /* ================= gallery (real concept art) ================= */
+  var LB = { list: [], i: 0 };
+  function artistLink(a) {
+    var role = (window.ROLES && ROLES[a.handle]) || "";
+    return '<a href="https://www.artstation.com/' + a.handle + '" target="_blank" rel="noopener">' + esc(a.artist) + "</a>" + (role && role !== "Bungie" ? ' <span class="role">· ' + esc(role) + "</span>" : "");
+  }
+  function chapterOf(a) { return ART.filter(function (c) { return c.id === a.chapter; })[0]; }
+  function L(en, zh) { return lang === "zh" ? zh : en; }
+
+  function openLB(list, i) {
+    LB.list = list; LB.i = i; var lb = $("#lb");
+    lb.hidden = false; document.body.classList.add("lb-open"); drawLB(); $(".lb-x", lb).focus();
+  }
+  function closeLB() { $("#lb").hidden = true; document.body.classList.remove("lb-open"); }
+  function drawLB() {
+    if (!LB.list.length) return;
+    var a = ART_INDEX[LB.list[LB.i]], c = chapterOf(a);
+    var img = $("#lbImg"); img.src = a.img; img.alt = a.title.en + " by " + a.artist;
+    $("#lbCap").innerHTML = '<p class="lb-meta">' + esc(c.name[lang]) + " · " + c.year + " · " + a.id + " · " + (LB.i + 1) + " / " + LB.list.length + "</p><h3>" + esc(a.title[lang]) + '</h3><p class="by">' + artistLink(a) + "</p>" +
+      "<h4>" + L("How it is designed", "设计手法") + "</h4><p>" + esc(a.how[lang]) + "</p><h4>" + L("How it echoes the story", "与故事的呼应") + "</h4><p>" + esc(a.story[lang]) + "</p>" +
+      '<p class="src"><a href="' + a.img + '" target="_blank" rel="noopener">' + L("Open image", "打开图片") + '</a> · <a href="https://www.artstation.com/' + a.handle + '" target="_blank" rel="noopener">ArtStation</a> · <a href="' + c.blast + '" target="_blank" rel="noopener">' + L("Art blast", "作品专题") + "</a></p>";
+  }
+  (function lbWire() {
+    var lb = $("#lb"); if (!lb) return;
+    $(".lb-x", lb).addEventListener("click", closeLB);
+    $(".lb-prev", lb).addEventListener("click", function () { LB.i = (LB.i - 1 + LB.list.length) % LB.list.length; drawLB(); });
+    $(".lb-next", lb).addEventListener("click", function () { LB.i = (LB.i + 1) % LB.list.length; drawLB(); });
+    lb.addEventListener("click", function (e) { if (e.target === lb) closeLB(); });
+    renderers.push(function () { if (!lb.hidden) drawLB(); });
+  })();
+
+  function card(a, i) {
+    return '<article class="art-card"><button type="button" class="art-img" data-open="' + i + '" aria-label="' + esc(a.title.en) + '"><img loading="lazy" src="' + a.img + '" alt="' + esc(a.title.en) + " by " + esc(a.artist) + '"><span class="art-id">' + a.id + "</span></button>" +
+      '<div class="art-body"><h3>' + esc(a.title[lang]) + '</h3><p class="by">' + artistLink(a) + "</p>" +
+      "<h4>" + L("How it is designed", "设计手法") + "</h4><p>" + esc(a.how[lang]) + "</p>" +
+      '<h4 class="st">' + L("How it echoes the story", "与故事的呼应") + "</h4><p>" + esc(a.story[lang]) + "</p></div></article>";
+  }
+  function trackBtns(c) {
+    return c.ost.map(function (t) { return '<button type="button" class="trk" data-v="' + t.v + '" data-t="' + esc(c.name.en + " · " + t.t) + '"><span>▶</span>' + esc(t.t) + "</button>"; }).join("");
+  }
+
+  (function gallery() {
+    var rail = $("#galRail"), head = $("#galHead"), grid = $("#galGrid"); if (!rail || !window.ART) return;
+    var cur = ART.findIndex(function (c) { return c.id === "finalshape"; });
+    function ids() { return ART[cur].art.map(function (a) { return a.id; }); }
     function draw() {
-      rail.innerHTML = D.xp.map(function (x, i) {
-        return '<button role="tab" aria-selected="' + (i === cur) + '" data-i="' + i + '" style="--c:' + x.pal[2] + '"><span class="y">' + x.year + "</span>" + esc(x[lang].name) + "</button>";
+      rail.innerHTML = ART.map(function (c, i) {
+        return '<button role="tab" aria-selected="' + (i === cur) + '" data-i="' + i + '" style="--c:' + c.pal[0] + '"><span class="y">' + c.year + " · " + c.art.length + "</span>" + esc(c.name[lang]) + "</button>";
       }).join("");
-      var x = D.xp[cur], t = x[lang];
-      var L = lang === "zh" ? { w: "地点", th: "视觉命题", st: "故事", lk: "该看什么" } : { w: "Where", th: "Visual thesis", st: "Story", lk: "What to look at" };
-      card.style.setProperty("--c", x.pal[2]);
-      card.innerHTML = '<div class="xp-art">' + emblem(x) + '<div class="swatches">' + x.pal.map(function (c) { return '<i style="background:' + c + '" title="' + c + '"></i>'; }).join("") + "</div></div>" +
-        '<div class="xp-body"><p class="tagline">' + x.year + " · " + esc(t.where) + "</p><h3>" + esc(t.name) + '</h3><p class="thesis"><span>' + L.th + "</span>" + esc(t.thesis) + "</p>" +
-        "<h4>" + L.st + "</h4><p>" + esc(t.story) + "</p><h4>" + L.lk + "</h4><p>" + esc(t.look).replace("³", '<span class="cite"><a href="#src-3">[3]</a></span>').replace("⁴", '<span class="cite"><a href="#src-4">[4]</a></span>') + "</p>" +
-        '<div class="xp-nav"><button data-step="-1" aria-label="Previous">←</button><span>' + (cur + 1) + " / " + D.xp.length + '</span><button data-step="1" aria-label="Next">→</button></div></div>';
+      var c = ART[cur];
+      head.style.setProperty("--c", c.pal[0]);
+      head.innerHTML = '<div class="gh-top"><div><p class="tagline">' + c.year + " · " + c.art.length + L(" pieces", " 张作品") + "</p><h3>" + esc(c.name[lang]) + '</h3></div><div class="swatches">' + c.pal.map(function (p) { return '<i style="background:' + p + '"></i>'; }).join("") + "</div></div>" +
+        '<p class="gh-intro">' + c.intro[lang] + "</p>" +
+        '<div class="gh-ost"><span class="lbl">' + L("Soundtrack", "原声") + "</span>" + trackBtns(c) + '<a class="blast" href="' + c.blast + '" target="_blank" rel="noopener">' + L("ArtStation art blast ↗", "ArtStation 作品专题 ↗") + "</a></div>";
+      grid.innerHTML = c.art.map(function (a, i) { return card(a, i); }).join("");
+      $("#galCount").textContent = (cur + 1) + " / " + ART.length;
+    }
+    function step(d) {
+      cur = (cur + d + ART.length) % ART.length; draw();
+      var sel = rail.querySelector('[aria-selected="true"]'); if (sel && sel.scrollIntoView) sel.scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
     }
     rail.addEventListener("click", function (e) { var b = e.target.closest("button[data-i]"); if (b) { cur = +b.dataset.i; draw(); } });
-    card.addEventListener("click", function (e) { var b = e.target.closest("button[data-step]"); if (b) step(+b.dataset.step); });
-    function step(d) { cur = (cur + d + D.xp.length) % D.xp.length; draw(); var sel = rail.querySelector('[aria-selected="true"]'); if (sel && sel.scrollIntoView) sel.scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" }); }
+    grid.addEventListener("click", function (e) { var b = e.target.closest("[data-open]"); if (b) openLB(ids(), +b.dataset.open); });
+    $(".gal-nav").addEventListener("click", function (e) { var b = e.target.closest("[data-gstep]"); if (b) { step(+b.dataset.gstep); $("#gallery").scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); } });
     window.__xpStep = step;
     renderers.push(draw);
+  })();
+
+  /* evidence strips inside the thematic sections */
+  (function evidence() {
+    var els = $$(".evidence"); if (!els.length || !window.ART_INDEX) return;
+    function draw() {
+      els.forEach(function (el) {
+        var list = el.dataset.ids.split(",");
+        el.innerHTML = list.map(function (id, i) {
+          var a = ART_INDEX[id]; if (!a) return "";
+          return '<figure><button type="button" data-open="' + i + '" aria-label="' + esc(a.title.en) + '"><img loading="lazy" src="' + a.img + '" alt="' + esc(a.title.en) + " by " + esc(a.artist) + '"></button><figcaption><b>' + esc(a.title[lang]) + "</b>" + esc(a.artist) + " · " + esc(chapterOf(a).name[lang]) + "</figcaption></figure>";
+        }).join("");
+      });
+    }
+    els.forEach(function (el) { el.addEventListener("click", function (e) { var b = e.target.closest("[data-open]"); if (b) openLB(el.dataset.ids.split(","), +b.dataset.open); }); });
+    renderers.push(draw);
+  })();
+
+  /* soundtrack: list + persistent mini player */
+  (function soundtrack() {
+    var grid = $("#ostGrid"), player = $("#player"); if (!player || !window.ART) return;
+    function play(v, t) {
+      $("#plFrame").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + v + '?autoplay=1&rel=0" title="' + esc(t) + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      $("#plTitle").textContent = t; player.hidden = false; player.classList.remove("min");
+    }
+    document.addEventListener("click", function (e) { var b = e.target.closest(".trk"); if (b) play(b.dataset.v, b.dataset.t); });
+    $("#plClose").addEventListener("click", function () { player.hidden = true; $("#plFrame").innerHTML = ""; });
+    $("#plMin").addEventListener("click", function () { player.classList.toggle("min"); });
+    if (grid) renderers.push(function () {
+      grid.innerHTML = ART.map(function (c) {
+        return '<div class="ost-ch" style="--c:' + c.pal[0] + '"><p class="y">' + c.year + "</p><h3>" + esc(c.name[lang]) + '</h3><div class="trks">' + trackBtns(c) + "</div></div>";
+      }).join("");
+    });
   })();
 
   /* ================= factions ================= */
@@ -362,7 +420,14 @@
     document.addEventListener("keydown", function (e) {
       var tag = (e.target.tagName || "").toLowerCase();
       if (tag === "input" || tag === "textarea") return;
-      var inXp = e.target.closest && e.target.closest("#expansions");
+      if (!$("#lb").hidden) {
+        if (e.key === "Escape") closeLB();
+        else if (e.key === "ArrowRight") $(".lb-next").click();
+        else if (e.key === "ArrowLeft") $(".lb-prev").click();
+        if (/Arrow|Escape/.test(e.key)) e.preventDefault();
+        return;
+      }
+      var inXp = e.target.closest && e.target.closest("#gallery");
       if (inXp && (e.key === "ArrowRight" || e.key === "ArrowLeft")) { e.preventDefault(); window.__xpStep(e.key === "ArrowRight" ? 1 : -1); return; }
       if (e.key === "PageDown" || (e.key === "ArrowRight" && !e.altKey)) { e.preventDefault(); go(idx() + 1); }
       else if (e.key === "PageUp" || (e.key === "ArrowLeft" && !e.altKey)) { e.preventDefault(); go(idx() - 1); }

@@ -22,8 +22,9 @@
   <ul class="nav-links">
     <li><a href="#question"><span lang="en">Question</span><span lang="zh">问题</span></a></li>
     <li><a href="#lens"><span lang="en">Lens</span><span lang="zh">方法</span></a></li>
+    <li><a href="#gallery"><span lang="en">Gallery</span><span lang="zh">作品集</span></a></li>
     <li><a href="#shape"><span lang="en">Final Shape</span><span lang="zh">终焉之形</span></a></li>
-    <li><a href="#expansions"><span lang="en">Expansions</span><span lang="zh">全部资料片</span></a></li>
+    <li><a href="#ost"><span lang="en">Soundtrack</span><span lang="zh">原声</span></a></li>
     <li><a href="#factions"><span lang="en">Factions</span><span lang="zh">种族</span></a></li>
     <li><a href="#lore"><span lang="en">Lore</span><span lang="zh">世界观</span></a></li>
     <li><a href="#talk"><span lang="en">Discuss</span><span lang="zh">讨论</span></a></li>
@@ -153,10 +154,27 @@
 
 <hr class="rule">
 
+<!-- ============ GALLERY ============ -->
+<section id="gallery" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">03 · <span lang="en">The real concept art, 2017–2025</span><span lang="zh">真实的概念美术，2017–2025</span></p>
+    <h2><span lang="en">Reading the art, one expansion at a time</span><span lang="zh">一部资料片一部资料片地读画</span></h2>
+    <div class="narrow">
+      <p><span lang="en">98 pieces by Bungie's artists (concept, world, lighting, character, vista and marketing art), chosen from their public ArtStation portfolios and ArtStation's official Bungie art blasts. Each card gives two readings: <b>how it is designed</b> (shape, value, colour, composition) and <b>how it echoes the story</b>. Click any image to see it large; use ← → inside the viewer. Each chapter also has its own soundtrack.</span><span lang="zh">共 98 张作品，出自 Bungie 的概念、世界、灯光、角色、远景与市场美术师，选自他们公开的 ArtStation 作品集和 ArtStation 官方的 Bungie 作品专题。每张卡片给出两层解读：<b>设计手法</b>（形状、明暗、色彩、构图）和<b>与故事的呼应</b>。点击任意图片可放大，在大图里用 ← → 翻页。每一章还配有对应的原声。</span></p>
+    </div>
+    <div class="xp-rail" role="tablist" aria-label="Expansions" id="galRail"></div>
+    <div class="gal-head" id="galHead" aria-live="polite"></div>
+    <div class="gal-grid" id="galGrid"></div>
+    <div class="xp-nav gal-nav"><button type="button" data-gstep="-1" aria-label="Previous expansion">←</button><span id="galCount"></span><button type="button" data-gstep="1" aria-label="Next expansion">→</button></div>
+  </div>
+</section>
+
+<hr class="rule">
+
 <!-- ============ 03 ORGANIC VS GEOMETRIC ============ -->
 <section id="shape" data-slide>
   <div class="wrap reveal">
-    <p class="eyebrow">03 · <span lang="en">The central contrast</span><span lang="zh">核心对比</span></p>
+    <p class="eyebrow">04 · <span lang="en">The central contrast</span><span lang="zh">核心对比</span></p>
     <h2><span lang="en">The living and the final</span><span lang="zh">生长之物与终焉之形</span></h2>
     <div class="narrow">
       <p>
@@ -191,6 +209,9 @@
         </div>
       </div>
     </div>
+    <h3 class="ev-title"><span lang="en">In the actual art</span><span lang="zh">在真实的美术中</span></h3>
+    <p class="ev-lead"><span lang="en">From the garden end to the final end: a flower field under monoliths, a cabin in a valley, landscape broken into indexed cubes, and a stepped black mass with no surface at all.</span><span lang="zh">从“花园”一端到“终焉”一端：巨石下的花海、山谷里的小木屋、被打碎成索引方块的风景，以及一个完全没有表面的黑色阶梯团块。</span></p>
+    <div class="evidence" data-ids="TF8,TF12,TF5,TF3,TF7,TF15"></div>
   </div>
 </section>
 
@@ -199,7 +220,7 @@
 <!-- ============ 04 CONTEXT ============ -->
 <section id="context" data-slide>
   <div class="wrap reveal">
-    <p class="eyebrow">04 · <span lang="en">Meaning lives in relationships</span><span lang="zh">意义存在于关系之中</span></p>
+    <p class="eyebrow">05 · <span lang="en">Meaning lives in relationships</span><span lang="zh">意义存在于关系之中</span></p>
     <h2><span lang="en">Same shape, three stories</span><span lang="zh">同一个形状，三种故事</span></h2>
     <div class="narrow">
       <p><span lang="en">Here is the cottage-and-wilderness idea, tested. One pale sphere, unchanged. Only its surroundings move. Destiny uses exactly this trick with the Traveler: the same object reads as protector, prisoner or patient depending on what is around it.</span><span lang="zh">来验证一下"荒野中的小屋"这个想法。一个苍白的球体，完全不变，只改变它周围的环境。《命运》对旅者用的正是这个手法：同一个物体，因为周围的东西不同，可以被读成守护者、囚徒，或是病人。</span></p>
@@ -213,6 +234,9 @@
       <div class="ctx-stage"><svg id="ctxSvg" viewBox="0 0 800 360" role="img" aria-label="The same sphere in three contexts"></svg></div>
       <div class="ctx-read" id="ctxRead"></div>
     </div>
+    <h3 class="ev-title"><span lang="en">Bungie did this experiment for real</span><span lang="zh">Bungie 真的做过这个实验</span></h3>
+    <p class="ev-lead"><span lang="en">Eve Astra painted Osiris's Lighthouse twice for Curse of Osiris: once in the present, warm and radiant, and once in a Vex-ruled future, broken in red and blue. Same building, different context, opposite feeling. Next to them: the caged Traveler, a campfire on Europa, and a pocket of green in the burned EDZ.</span><span lang="zh">Eve Astra 为《奥西里斯的诅咒》把奥西里斯的灯塔画了两次：一次是现在，温暖而辉煌；一次是维克斯统治的未来，在红蓝色中破碎。同一座建筑，不同的语境，相反的感受。旁边是：被囚禁的旅者、欧罗巴的篝火、烧焦的欧洲无人区里一片绿色。</span></p>
+    <div class="evidence" data-ids="CO2,CO3,RW1,BL5,RW5,RW3"></div>
   </div>
 </section>
 
@@ -221,14 +245,15 @@
 <!-- ============ 05 BEYOND LIGHT LABS ============ -->
 <section id="labs" data-slide>
   <div class="wrap reveal">
-    <p class="eyebrow">05 · <span lang="en">Beyond Light</span><span lang="zh">凡人之外</span></p>
+    <p class="eyebrow">06 · <span lang="en">Beyond Light</span><span lang="zh">凡人之外</span></p>
     <h2><span lang="en">The cold pleasure of an empty lab</span><span lang="zh">空旷实验室的冷感愉悦</span></h2>
     <div class="lab-grid">
-      <div class="lab-art"><svg id="labSvg" viewBox="0 0 480 320" role="img" aria-label="An original drawing of a spare white laboratory corridor with a frozen window"></svg></div>
+      <div class="lab-art"><div class="evidence one" data-ids="BL8"></div></div>
       <div>
         <p><span lang="en">Beyond Light (2020) takes Guardians to <strong>Europa</strong>, Jupiter's ice moon, and into the abandoned research facilities of <strong>Clovis Bray</strong>, the Golden Age corporation that invented the Exos by copying human minds into machine bodies. Outside: storms, blue ice, broken Fallen camps. Inside: long white corridors, recessed lighting, brushed steel, very few objects.</span><span lang="zh">《凡人之外》（2020）把守护者带到木星的冰卫星<strong>欧罗巴</strong>，进入黄金时代企业<strong>克洛维斯·布雷（Clovis Bray）</strong>废弃的研究设施。正是这家公司把人类意识复制进机械身体，造出了 Exo。外面是暴风雪、蓝冰和破败的堕落者营地；里面是长长的白色走廊、嵌入式灯光、拉丝金属，以及极少的物件。</span></p>
         <p><span lang="en">Why does emptiness feel so good, and so ominous? Read it with Bang: the light ground feels safe; the long horizontals feel calm; the center is empty, so your eye searches. And then context does the rest. You know what was done in these rooms. The sterility starts to read as moral sterility: a place so clean that nothing human could have lived in it.</span><span lang="zh">为什么空旷会让人既舒服又不安？用 Bang 的原则来读：浅色背景让人感到安全；长长的水平线让人平静；画面中心是空的，于是眼睛开始搜寻。然后语境完成剩下的部分：你知道这些房间里做过什么。洁净开始被读作道德上的"无菌"：一个干净到不可能有人性生活过的地方。</span></p>
         <p><span lang="en">Beyond Light is also where Guardians first wield the Darkness, as <strong>Stasis</strong>: an ice-blue, crystalline power. Crystals are geometry that grows. Fittingly, it is the first hint that the Darkness is about order, about stopping things in place.</span><span lang="zh">《凡人之外》也是守护者第一次使用黑暗之力，也就是<strong>冰影（Stasis）</strong>：一种冰蓝色、结晶状的力量。晶体是"会生长的几何"。这恰好是第一个暗示：黑暗关乎秩序，关乎让一切停止在原地。</span></p>
+        <div class="evidence small" data-ids="BL2,BL6,BL7"></div>
         <p class="aside"><span lang="en">An engineer's note: this is the same lesson industrial designers use on medical and lab equipment. White, rounded casings and wide margins signal "safe and controlled." Destiny keeps the visual language of safety and removes the safety itself.</span><span lang="zh">工程师视角的一点补充：这和工业设计师在医疗、实验设备上用的是同一套语言。白色、圆角外壳、留白，传达"安全、受控"。《命运》保留了安全的视觉语言，却抽走了安全本身。</span></p>
       </div>
     </div>
@@ -240,7 +265,7 @@
 <!-- ============ 06 PILLARS ============ -->
 <section id="pillars" data-slide>
   <div class="wrap reveal">
-    <p class="eyebrow">06 · <span lang="en">How Bungie describes its own art</span><span lang="zh">Bungie 如何描述自己的美术</span></p>
+    <p class="eyebrow">07 · <span lang="en">How Bungie describes its own art</span><span lang="zh">Bungie 如何描述自己的美术</span></p>
     <h2><span lang="en">Mythic science fiction</span><span lang="zh">神话科幻</span></h2>
     <div class="narrow">
       <p><span lang="en">At GDC 2013, before the first Destiny shipped, writer Joe Staten and art director Christopher Barrett described the project as <strong>"mythic science fiction"</strong>: ancient, fantasy-style history fused with space opera.<span class="cite"><a href="#src-1">[1]</a></span> Almost everything visual in Destiny 2 still follows the principles from that talk.</span><span lang="zh">在 2013 年的 GDC 上，初代《命运》发售之前，编剧 Joe Staten 与美术总监 Christopher Barrett 把这个项目描述为<strong>"神话科幻"</strong>：古老的、奇幻式的历史与太空歌剧融为一体。<span class="cite"><a href="#src-1">[1]</a></span>《命运2》几乎所有的视觉表达，仍然遵循那次演讲里的原则。</span></p>
@@ -282,18 +307,16 @@
 
 <hr class="rule">
 
-<!-- ============ 07 EXPANSIONS ============ -->
-<section id="expansions" data-slide>
+<!-- ============ SOUNDTRACK ============ -->
+<section id="ost" data-slide>
   <div class="wrap reveal">
-    <p class="eyebrow">07 · <span lang="en">Every expansion, 2017–2025</span><span lang="zh">全部资料片，2017–2025</span></p>
-    <h2><span lang="en">Each expansion is a visual thesis</span><span lang="zh">每一部资料片都是一个视觉命题</span></h2>
+    <p class="eyebrow"><span lang="en">Listen while you look</span><span lang="zh">边听边看</span></p>
+    <h2><span lang="en">The soundtrack, expansion by expansion</span><span lang="zh">原声带，一部一部听</span></h2>
     <div class="narrow">
-      <p><span lang="en">Choose an expansion. Each one gets its own palette, a governing visual idea, the story beat, and a note on what to look at. Use ← → to step through when presenting.</span><span lang="zh">选择一部资料片。每一部都有自己的配色、核心视觉理念、故事要点，以及"该看什么"的提示。演示时可以用 ← → 键切换。</span></p>
+      <p><span lang="en">Every track below is Bungie's official upload on YouTube. Press a track and it plays in a small player in the corner, so the music keeps going while you scroll through the art. Destiny's music was led for years by Michael Salvatori, with Skye Lewin, Josh Mosser, Michael Sechrist and others; Destiny 2's first score also features the Kronos Quartet ("Journey").</span><span lang="zh">下面每一首都是 Bungie 在 YouTube 上的官方上传。点击曲目后，它会在页面角落的小播放器里播放，你可以一边听一边继续浏览作品。《命运》的音乐多年来由 Michael Salvatori 主导，Skye Lewin、Josh Mosser、Michael Sechrist 等人共同创作；《命运2》初版原声还邀请了克罗诺斯四重奏（Kronos Quartet，曲目《Journey》）。</span></p>
+      <p class="aside"><span lang="en">Try it with the gallery: play "Journey" and look at Sung Choi's painting of the same name; play "Deep Stone Lullaby" and look at the Braytech labs. Music, like a background, changes what a shape means.</span><span lang="zh">配合作品集试一试：播放《Journey》，同时看 Sung Choi 同名的那张画；播放《Deep Stone Lullaby》，同时看布雷科技的实验室。音乐和背景一样，会改变一个形状的意义。</span></p>
     </div>
-    <div class="xp">
-      <div class="xp-rail" role="tablist" aria-label="Expansions" id="xpRail"></div>
-      <div class="xp-card" id="xpCard" aria-live="polite"></div>
-    </div>
+    <div class="ost-grid" id="ostGrid"></div>
   </div>
 </section>
 
@@ -388,9 +411,11 @@
       <li id="src-10">Game Informer, "How Bungie Built the World of Destiny" (2013). <a href="https://gameinformer.com/b/news/archive/2013/03/28/how-bungie-built-the-world-of-destiny.aspx" target="_blank" rel="noopener">gameinformer.com</a></li>
       <li id="src-11">Destinypedia, community lore wiki: <a href="https://www.destinypedia.com/Traveler" target="_blank" rel="noopener">The Traveler</a>, <a href="https://www.destinypedia.com/Pale_Heart" target="_blank" rel="noopener">The Pale Heart</a>, <a href="https://destinypedia.com/Hive" target="_blank" rel="noopener">The Hive</a>.</li>
       <li id="src-12">Molly Bang, <i>Picture This: How Pictures Work</i> (SeaStar Books, 1991; revised edition, Chronicle Books, 2016).</li>
+      <li id="src-14"><span lang="en">Artwork in the gallery: each artist's public ArtStation portfolio (linked on every card) and ArtStation Magazine's Bungie art blasts: </span><span lang="zh">作品集中的图片：每位艺术家公开的 ArtStation 作品集（每张卡片上都有链接），以及 ArtStation Magazine 的 Bungie 作品专题：</span><a href="https://magazine.artstation.com/2024/09/bungie-10-year-destiny-art-blast/" target="_blank" rel="noopener">10 Years of Destiny</a>, <a href="https://magazine.artstation.com/2022/03/bungie-destiny-2-the-witch-queen-art-blast/" target="_blank" rel="noopener">The Witch Queen</a>, <a href="https://magazine.artstation.com/2023/03/bungie-destiny-2-lightfall-art-blast/" target="_blank" rel="noopener">Lightfall</a>, <a href="https://magazine.artstation.com/2024/06/bungie-destiny-2-the-final-shape/" target="_blank" rel="noopener">The Final Shape</a>, <a href="https://magazine.artstation.com/2025/08/bungie-destiny-2-the-edge-of-fate-art-blast/" target="_blank" rel="noopener">The Edge of Fate</a>, <a href="https://magazine.artstation.com/2025/12/bungie-destiny-2-renegades-art-blast/" target="_blank" rel="noopener">Renegades</a>.</li>
+      <li id="src-15"><span lang="en">Soundtrack: official uploads on Bungie's / Destiny 2's YouTube channels.</span><span lang="zh">原声：Bungie / Destiny 2 官方 YouTube 频道的上传。</span></li>
       <li id="src-13"><span lang="en">Primary sources to explore in the game itself: the lore books <i>Books of Sorrow</i> (Hive origins), <i>Unveiling</i> (the Gardener and the Winnower, Shadowkeep), and <i>Lucent Moth</i> (The Witch Queen); and Bungie's ViDocs released before each expansion on Bungie's official YouTube channel.</span><span lang="zh">游戏内可以继续探索的一手资料：传说书《哀伤之书》（邪魔起源）、《揭示》（园丁与筛选者，暗影要塞）、《光蛾》（邪姬魅影）；以及 Bungie 在每部资料片发售前于官方 YouTube 频道发布的 ViDoc 开发纪录片。</span></li>
     </ol>
-    <p class="disclaimer"><span lang="en">A fan study made for learning and discussion. Destiny and Destiny 2 are trademarks of Bungie, Inc. All illustrations on this page are original CSS/SVG abstractions; no game artwork is reproduced. Follow the links above to see Bungie's actual concept art. Quotes are short excerpts from the cited articles; lore summaries are paraphrased.</span><span lang="zh">这是一份用于学习与讨论的粉丝研究。Destiny 与 Destiny 2 是 Bungie, Inc. 的商标。本页所有插图均为原创 CSS/SVG 抽象图形，未复制任何游戏美术。想看 Bungie 真正的概念画，请点击上面的链接。引文为所引文章中的简短摘录；世界观内容为转述。</span></p>
+    <p class="disclaimer"><span lang="en">A fan study made for learning and discussion. Destiny and Destiny 2 are trademarks of Bungie, Inc. Concept art in the gallery is © Bungie, Inc. and the credited artists. It is shown for non-commercial study and commentary, credited on every card, and loaded directly from the artists' ArtStation posts rather than copied into this site. The diagrams (hero, playgrounds, faction glyphs) are original SVG. Soundtrack videos are embedded from official YouTube uploads. Quotes are short excerpts from the cited articles; lore summaries are paraphrased.</span><span lang="zh">这是一份用于学习与讨论的粉丝研究。Destiny 与 Destiny 2 是 Bungie, Inc. 的商标。作品集中的概念美术版权归 Bungie, Inc. 及署名艺术家所有，仅用于非商业的学习与评论，每张卡片都注明作者，图片直接从艺术家的 ArtStation 页面加载，而不是复制到本站。示意图（首页、互动演示、种族图形）为原创 SVG。原声视频嵌入自官方 YouTube 上传。引文为所引文章中的简短摘录；世界观内容为转述。</span></p>
   </div>
 </section>
 
@@ -398,7 +423,20 @@
 
 <div class="hint" id="hint"><span lang="en">← → to move between sections · Esc to exit</span><span lang="zh">← → 切换章节 · Esc 退出</span></div>
 
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Artwork viewer">
+  <button class="lb-x" type="button" aria-label="Close">×</button>
+  <button class="lb-arrow lb-prev" type="button" aria-label="Previous">←</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-arrow lb-next" type="button" aria-label="Next">→</button>
+</div>
+
+<div class="player" id="player" hidden>
+  <div class="pl-bar"><span class="pl-note">♪</span><span id="plTitle"></span><button type="button" id="plMin" aria-label="Minimise">–</button><button type="button" id="plClose" aria-label="Close">×</button></div>
+  <div class="pl-frame" id="plFrame"></div>
+</div>
+
 <script src="data.js"></script>
+<script src="art.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

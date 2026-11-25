@@ -1,6 +1,6 @@
 /* ==========================================================
    Light & Shape — an essay on Destiny 2's art direction
-   All visuals are original CSS/SVG. No game assets are used.
+   Diagrams are original SVG; gallery art is hotlinked from the credited artists.
    ========================================================== */
 
 :root {
@@ -314,3 +314,95 @@ html[data-lang="zh"] .xp-body .thesis { font-family: "Noto Serif SC", serif; fon
 @media (max-width: 860px) { .xp-card { grid-template-columns: 1fr; padding: 20px; } }
 
 .panel .swatches { margin-top: 12px; }
+
+/* ---------- gallery ---------- */
+#gallery .xp-rail { margin-top: 36px; }
+.gal-head { margin-top: 18px; border: 1px solid var(--panel-line); border-radius: 4px; padding: 26px 28px; background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--c) 12%, transparent), transparent 60%), var(--bg-2); animation: fade .5s; }
+.gh-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.gh-top .swatches { margin-top: 0; }
+.gal-head .tagline { font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--c); margin-bottom: 6px; }
+.gal-head h3 { font-size: clamp(28px, 3.4vw, 40px); color: var(--pale); margin: 0; }
+.gh-intro { font-size: 16px; line-height: 1.75; margin: 16px 0 0; max-width: 78ch; }
+.gh-intro b { color: var(--pale); }
+.gh-ost { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; }
+.gh-ost .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); margin-right: 4px; }
+.gh-ost .blast { margin-left: auto; font-size: 13px; color: var(--ink-dim); }
+.trk { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid var(--panel-line); border-radius: 999px; font-size: 13px; color: var(--ink); background: var(--panel); }
+.trk span { font-size: 10px; color: var(--c, var(--gold)); }
+.trk:hover { border-color: var(--c, var(--gold)); }
+.trk:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; margin-top: 22px; }
+.art-card { border: 1px solid var(--panel-line); border-radius: 4px; overflow: hidden; background: var(--bg-2); display: flex; flex-direction: column; animation: fade .5s; }
+.art-img { all: unset; cursor: zoom-in; position: relative; display: block; aspect-ratio: 16 / 10; background: #000; overflow: hidden; }
+.art-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+.art-img:hover img { transform: scale(1.04); }
+.art-img:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.art-id { position: absolute; left: 10px; top: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; padding: 3px 7px; background: rgba(7,8,12,.75); color: var(--gold); border-radius: 2px; }
+.art-body { padding: 16px 18px 20px; }
+.art-body h3 { font-size: 22px; color: var(--pale); margin: 0 0 4px; }
+html[data-lang="zh"] .art-body h3 { font-size: 19px; }
+.by { font-size: 13px; color: var(--ink-dim); margin: 0 0 10px; }
+.by a { color: var(--ink); }
+.by .role { color: var(--ink-faint); }
+.art-body h4, .lb figcaption h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin: 14px 0 4px; font-weight: 400; }
+.art-body h4.st, .lb figcaption h4 + p + h4 { color: #9fd4f0; }
+.art-body p { font-size: 14.5px; line-height: 1.65; margin: 0; }
+.gal-nav { justify-content: center; margin-top: 28px; }
+
+/* ---------- evidence strips ---------- */
+.ev-title { margin-top: 48px; font-size: 24px; color: var(--pale); }
+.ev-lead { max-width: 72ch; color: var(--ink-dim); }
+.evidence { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin-top: 16px; }
+.evidence.one { grid-template-columns: 1fr; margin-top: 0; }
+.evidence.small { grid-template-columns: repeat(3, 1fr); margin: 18px 0; }
+.evidence figure { margin: 0; }
+.evidence button { all: unset; cursor: zoom-in; display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 3px; border: 1px solid var(--panel-line); background: #000; width: 100%; }
+.evidence.one button { aspect-ratio: 4 / 3; }
+.evidence img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; }
+.evidence button:hover img { transform: scale(1.05); }
+.evidence button:focus-visible { outline: 2px solid var(--gold); }
+.evidence figcaption { font-size: 12px; color: var(--ink-faint); margin-top: 6px; line-height: 1.45; }
+.evidence figcaption b { display: block; color: var(--ink); font-weight: 500; font-size: 13px; }
+
+/* ---------- lightbox ---------- */
+body.lb-open { overflow: hidden; }
+.lb { position: fixed; inset: 0; z-index: 200; background: rgba(4,5,8,.94); display: grid; grid-template-columns: 56px 1fr 56px; align-items: center; padding: 20px 8px; }
+.lb[hidden] { display: none; }
+.lb figure { margin: 0; display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr); gap: 28px; align-items: center; max-height: calc(100vh - 40px); }
+.lb img { width: 100%; max-height: calc(100vh - 60px); object-fit: contain; display: block; }
+.lb figcaption { max-height: calc(100vh - 60px); overflow: auto; padding-right: 8px; }
+.lb figcaption h3 { font-size: 28px; color: var(--pale); margin: 4px 0; }
+.lb figcaption p { font-size: 15px; line-height: 1.7; }
+.lb-meta { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin: 0; }
+.lb .src { font-size: 13px; margin-top: 16px; }
+.lb-x, .lb-arrow { all: unset; cursor: pointer; color: var(--ink); display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--panel-line); border-radius: 50%; justify-self: center; background: rgba(7,8,12,.6); }
+.lb-x { position: absolute; top: 14px; right: 14px; font-size: 22px; }
+.lb-x:hover, .lb-arrow:hover { border-color: var(--gold); color: var(--gold); }
+.lb-x:focus-visible, .lb-arrow:focus-visible { outline: 2px solid var(--gold); }
+@media (max-width: 900px) {
+  .lb { grid-template-columns: 1fr; grid-template-rows: 1fr auto; padding: 56px 16px 16px; overflow: auto; align-items: start; }
+  .lb figure { grid-template-columns: 1fr; max-height: none; }
+  .lb img { max-height: 55vh; }
+  .lb figcaption { max-height: none; }
+  .lb-arrow { position: fixed; bottom: 16px; }
+  .lb-prev { left: 16px; } .lb-next { right: 16px; }
+}
+
+/* ---------- soundtrack ---------- */
+.ost-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 32px; }
+.ost-ch { border: 1px solid var(--panel-line); border-top: 3px solid var(--c); border-radius: 4px; padding: 16px 18px; background: var(--bg-2); }
+.ost-ch .y { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--c); margin: 0; }
+.ost-ch h3 { font-size: 21px; color: var(--pale); margin: 2px 0 12px; }
+.ost-ch .trks { display: flex; flex-wrap: wrap; gap: 8px; }
+.player { position: fixed; right: 16px; bottom: 16px; z-index: 150; width: min(360px, calc(100vw - 32px)); background: #0b0d13; border: 1px solid var(--panel-line); border-radius: 6px; box-shadow: 0 12px 40px rgba(0,0,0,.6); overflow: hidden; }
+.player[hidden] { display: none; }
+.pl-bar { display: flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 12.5px; color: var(--ink); }
+.pl-bar #plTitle { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.pl-note { color: var(--gold); }
+.pl-bar button { all: unset; cursor: pointer; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-dim); }
+.pl-bar button:hover { color: var(--gold); }
+.pl-frame { aspect-ratio: 16 / 9; }
+.pl-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.player.min .pl-frame { height: 0; aspect-ratio: auto; overflow: hidden; }
+@media (max-width: 600px) { .gal-grid { grid-template-columns: 1fr; } .gal-head { padding: 20px; } .evidence.small { grid-template-columns: 1fr 1fr; } }
