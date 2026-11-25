@@ -332,14 +332,38 @@ html[data-lang="zh"] .xp-body .thesis { font-family: "Noto Serif SC", serif; fon
 .trk:hover { border-color: var(--c, var(--gold)); }
 .trk:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
-.gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; margin-top: 22px; }
+.gal-scroller { position: relative; margin-top: 22px; }
+.gal-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: minmax(260px, 300px); gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-left: 2px; padding: 2px 2px 6px; scrollbar-width: none; cursor: grab; }
+.gal-grid::-webkit-scrollbar { display: none; }
+.gal-grid.one-row { grid-template-rows: auto; }
+.gal-grid.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.gal-grid.dragging .art-img { pointer-events: none; }
+.gal-grid:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.gal-grid .art-card { scroll-snap-align: start; }
+.gal-grid .art-img { aspect-ratio: 16 / 9; }
+.gal-grid .art-body h3 { font-size: 19px; }
+.gal-grid .art-body p { font-size: 13.5px; line-height: 1.6; }
+.gs-btn { all: unset; cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; color: var(--pale); background: rgba(7,8,12,.82); border: 1px solid var(--panel-line); backdrop-filter: blur(6px); transition: opacity .25s, border-color .2s; }
+.gs-btn:hover { border-color: var(--gold); color: var(--gold); }
+.gs-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.gs-btn:disabled { opacity: 0; pointer-events: none; }
+.gs-prev { left: -18px; } .gs-next { right: -18px; }
+.gs-foot { display: flex; align-items: center; gap: 18px; margin-top: 14px; }
+.gs-bar { flex: 1; height: 2px; background: var(--panel-line); border-radius: 2px; overflow: hidden; }
+.gs-bar i { display: block; height: 100%; background: var(--gold); transition: margin-left .15s linear; }
+.gs-hint { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+.art-body p.clamp { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.more { all: unset; cursor: pointer; margin-top: 12px; font-size: 13px; color: var(--gold); }
+.more:hover { text-decoration: underline; }
+.more:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .art-card { border: 1px solid var(--panel-line); border-radius: 4px; overflow: hidden; background: var(--bg-2); display: flex; flex-direction: column; animation: fade .5s; }
 .art-img { all: unset; cursor: zoom-in; position: relative; display: block; aspect-ratio: 16 / 10; background: #000; overflow: hidden; }
 .art-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
 .art-img:hover img { transform: scale(1.04); }
 .art-img:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
 .art-id { position: absolute; left: 10px; top: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; padding: 3px 7px; background: rgba(7,8,12,.75); color: var(--gold); border-radius: 2px; }
-.art-body { padding: 16px 18px 20px; }
+.art-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
+.art-body .more { margin-top: auto; padding-top: 12px; }
 .art-body h3 { font-size: 22px; color: var(--pale); margin: 0 0 4px; }
 html[data-lang="zh"] .art-body h3 { font-size: 19px; }
 .by { font-size: 13px; color: var(--ink-dim); margin: 0 0 10px; }
@@ -405,4 +429,4 @@ body.lb-open { overflow: hidden; }
 .pl-frame { aspect-ratio: 16 / 9; }
 .pl-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 .player.min .pl-frame { height: 0; aspect-ratio: auto; overflow: hidden; }
-@media (max-width: 600px) { .gal-grid { grid-template-columns: 1fr; } .gal-head { padding: 20px; } .evidence.small { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .gal-grid { grid-template-rows: auto; grid-auto-columns: 84vw; } .gs-btn { display: none; } .gs-hint { display: none; } .gal-head { padding: 20px; } .evidence.small { grid-template-columns: 1fr 1fr; } }

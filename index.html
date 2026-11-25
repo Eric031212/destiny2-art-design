@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='%23f4efe2'/%3E%3Cpath d='M16 5 L14 16 L18 27' stroke='%2307080c' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -71,7 +71,7 @@
     <h1><span lang="en">Light <em>&amp;</em> Shape</span><span lang="zh">光<em>与</em>形</span></h1>
     <p class="sub">
       <span lang="en">How a game turns metaphysics into form: the art direction, visual language and story of Destiny 2, from the Red War to the Final Shape and beyond.</span>
-      <span lang="zh">一款游戏如何把形而上的思想变成可以看见的形状：《命运2》的美术方向、视觉语言与故事，从红色战争到终焉之形，再到之后。</span>
+      <span lang="zh">一款游戏如何把形而上的思想变成可以看见的形状：《命运2》的美术方向、视觉语言与故事，从猩红战争到终焉之形，再到之后。</span>
     </p>
     <a class="scroll-cue" href="#question"><span lang="en">Begin</span><span lang="zh">开始</span><span class="line"></span></a>
   </div>
@@ -84,16 +84,16 @@
     <h2><span lang="en">Why does a clean edge feel unsettling?</span><span lang="zh">为什么一条干净的边缘会让人不安？</span></h2>
     <p class="lead">
       <span lang="en">In The Final Shape, the eye travels from something that looks alive to a shape with an impossibly clean edge. It is beautiful, and a little wrong. In Beyond Light, the spare laboratory interiors give a different, colder pleasure. You can point to the individual choices you like. The harder question is how they work together to produce such a distinct feeling.</span>
-      <span lang="zh">在《终焉之形》里，视线会从一个"看起来活着"的东西，移到一个边缘干净得不可能的形状上。它很美，又带着一点不对劲。在《凡人之外》里，那些极简的实验室内景带来另一种更冷的愉悦。我们能指出自己喜欢的某个具体选择，但更难的问题是：这些选择是怎样组合在一起，产生如此独特的感受的？</span>
+      <span lang="zh">在《终焉之形》里，视线会从一个"看起来活着"的东西，移到一个边缘干净得不可能的形状上。它很美，又带着一点不对劲。在《凌光之刻》里，那些极简的实验室内景带来另一种更冷的愉悦。我们能指出自己喜欢的某个具体选择，但更难的问题是：这些选择是怎样组合在一起，产生如此独特的感受的？</span>
     </p>
     <p>
-      <span lang="en">This site grew out of a conversation with an illustrator who teaches game design at RISD. Their reply, written without having played the game, landed on the contrast between organic and inorganic forms, which happens to be the central conflict of Destiny's story. Their second point is the thread through everything below:</span>
-      <span lang="zh">这个网站源自与一位在 RISD 教游戏设计的插画家的交流。对方没有玩过这款游戏，却一眼看出了"有机形态与无机形态的对比"，而这恰好就是《命运》故事的核心冲突。对方的第二个观点，贯穿了下面所有内容：</span>
+      <span lang="en">This site is our attempt to take that question apart. Look closely and the contrast between organic and inorganic forms turns out to be more than a style: it is the central conflict of Destiny's story, the Light that gardens life against the Witness's final, perfect shape. One idea runs through everything below:</span>
+      <span lang="zh">这个网站是我们拆解这个问题的尝试。仔细看下去会发现，“有机形态与无机形态的对比”不只是一种风格，它就是《命运》故事的核心冲突：培育生命的光能，对抗见证者那最终而完美的形状。下面所有内容都贯穿着同一个观点：</span>
     </p>
     <blockquote class="pullquote">
       <span lang="en">The emotional meaning of a form is not inside the form. It emerges from its relationship to its surroundings and to the story around it.</span>
       <span lang="zh">一个形状的情感意义并不在形状本身，而是从它与周围环境、与它所处叙事的关系中浮现出来的。</span>
-      <footer><span lang="en">Paraphrased from the conversation: a cottage surrounded by wilderness, an infant surrounded by machinery.</span><span lang="zh">转述自那次交流：被荒野包围的小屋，被机器包围的婴儿。</span></footer>
+      <footer><span lang="en">Think of a cottage surrounded by wilderness, or an infant surrounded by machinery.</span><span lang="zh">想想被荒野包围的小屋，或被机器包围的婴儿。</span></footer>
     </blockquote>
     <div class="thesis-grid">
       <div><span class="num">I</span><h3><span lang="en">Form</span><span lang="zh">形</span></h3><p><span lang="en">Shapes carry feeling: round or pointed, flat or upright, light or dark.</span><span lang="zh">形状本身带有情绪：圆或尖，平或立，明或暗。</span></p></div>
@@ -164,7 +164,12 @@
     </div>
     <div class="xp-rail" role="tablist" aria-label="Expansions" id="galRail"></div>
     <div class="gal-head" id="galHead" aria-live="polite"></div>
-    <div class="gal-grid" id="galGrid"></div>
+    <div class="gal-scroller">
+      <button type="button" class="gs-btn gs-prev" data-gs="-1" aria-label="Scroll left">←</button>
+      <div class="gal-grid" id="galGrid" tabindex="0" aria-label="Artworks"></div>
+      <button type="button" class="gs-btn gs-next" data-gs="1" aria-label="Scroll right">→</button>
+    </div>
+    <div class="gs-foot"><div class="gs-bar"><i id="gsBar"></i></div><span class="gs-hint"><span lang="en">Drag, swipe or use the arrows · click a card to read the full analysis</span><span lang="zh">拖动、滑动或点箭头浏览 · 点击卡片阅读完整解读</span></span></div>
     <div class="xp-nav gal-nav"><button type="button" data-gstep="-1" aria-label="Previous expansion">←</button><span id="galCount"></span><button type="button" data-gstep="1" aria-label="Next expansion">→</button></div>
   </div>
 </section>
@@ -179,7 +184,7 @@
     <div class="narrow">
       <p>
         <span lang="en">Destiny's two cosmic forces are not simply good and evil. Lore calls them the <strong>Gardener</strong> and the <strong>Winnower</strong>: one tends a garden where anything may grow, the other believes only what survives the culling deserves to exist. By The Final Shape, the Darkness has a face, the <strong>Witness</strong>, and a goal: to impose one permanent, perfect shape on the universe and end change, uncertainty and suffering for good.</span>
-        <span lang="zh">《命运》里的两种宇宙力量并非简单的善与恶。设定中称它们为<strong>园丁（Gardener）</strong>与<strong>筛选者（Winnower）</strong>：一个照料花园，允许任何东西生长；另一个认为只有经过筛选而幸存的东西才配存在。到了《终焉之形》，黑暗有了面孔，也就是<strong>见证者（Witness）</strong>，它的目标是把一个永恒而完美的形状强加给宇宙，从此终结变化、不确定性与痛苦。</span>
+        <span lang="zh">《命运》里的两种宇宙力量并非简单的善与恶。设定中称它们为<strong>园丁（Gardener）</strong>与<strong>扬场工（Winnower）</strong>：一个照料花园，允许任何东西生长；另一个认为只有经过筛选而幸存的东西才配存在。到了《终焉之形》，黑暗有了面孔，也就是<strong>见证者（Witness）</strong>，它的目标是把一个永恒而完美的形状强加给宇宙，从此终结变化、不确定性与痛苦。</span>
       </p>
       <p>
         <span lang="en">So the art team had to make a philosophy visible. Drag the slider and watch the same form move from one side of the argument to the other.</span>
@@ -195,15 +200,15 @@
         <div class="side on" data-side="0">
           <p class="tag" style="color:var(--gold)"><span lang="en">Light · Gardener · growth</span><span lang="zh">光 · 园丁 · 生长</span></p>
           <h3><span lang="en">Irregular, warm, unfinished</span><span lang="zh">不规则、温暖、未完成</span></h3>
-          <p><span lang="en">The Light's world is full of things that are still becoming: overgrown ruins of the Golden Age, trees through concrete, flowing cloth on Guardian armor, the Traveler itself cracked and asymmetric. Imperfection reads as life, because only living things are allowed to be unfinished.</span><span lang="zh">光的世界充满"仍在生成中"的东西：被植被吞没的黄金时代废墟，穿透混凝土的树，守护者盔甲上飘动的布料，以及本身就破碎不对称的旅者。不完美被读作生命，因为只有活着的东西才可以"还没完成"。</span></p>
+          <p><span lang="en">The Light's world is full of things that are still becoming: overgrown ruins of the Golden Age, trees through concrete, flowing cloth on Guardian armor, the Traveler itself cracked and asymmetric. Imperfection reads as life, because only living things are allowed to be unfinished.</span><span lang="zh">光的世界充满"仍在生成中"的东西：被植被吞没的黄金时代废墟，穿透混凝土的树，守护者盔甲上飘动的布料，以及本身就破碎不对称的旅行者。不完美被读作生命，因为只有活着的东西才可以"还没完成"。</span></p>
         </div>
         <div class="side" data-side="1">
           <p class="tag" style="color:#c9b8ff"><span lang="en">The border · Pale Heart</span><span lang="zh">交界 · 苍白之心</span></p>
           <h3><span lang="en">Life meeting an edge</span><span lang="zh">生命撞上一条边</span></h3>
-          <p><span lang="en">This is the moment the eye loves and fears: soft, grown forms meeting a perfectly flat, perfectly black plane. Inside the Traveler, in the Pale Heart, memory-landscapes and Darkness monoliths coexist. Bang's rule applies: contrast is what lets us see. The clean edge only feels impossible because something alive sits next to it.</span><span lang="zh">这正是让眼睛既着迷又害怕的瞬间：柔软的、生长出来的形态，撞上一块绝对平整、绝对漆黑的平面。在旅者内部的苍白之心里，记忆中的风景与黑暗巨石并存。Bang 的原则在这里成立：对比让我们看见。那条干净的边之所以显得"不可能"，正是因为它旁边有活着的东西。</span></p>
+          <p><span lang="en">This is the moment the eye loves and fears: soft, grown forms meeting a perfectly flat, perfectly black plane. Inside the Traveler, in the Pale Heart, memory-landscapes and Darkness monoliths coexist. Bang's rule applies: contrast is what lets us see. The clean edge only feels impossible because something alive sits next to it.</span><span lang="zh">这正是让眼睛既着迷又害怕的瞬间：柔软的、生长出来的形态，撞上一块绝对平整、绝对漆黑的平面。在旅行者内部的苍白之心里，记忆中的风景与黑暗巨石并存。Bang 的原则在这里成立：对比让我们看见。那条干净的边之所以显得"不可能"，正是因为它旁边有活着的东西。</span></p>
         </div>
         <div class="side" data-side="2">
-          <p class="tag" style="color:#8f86ff"><span lang="en">Darkness · Winnower · the Witness</span><span lang="zh">黑暗 · 筛选者 · 见证者</span></p>
+          <p class="tag" style="color:#8f86ff"><span lang="en">Darkness · Winnower · the Witness</span><span lang="zh">黑暗 · 扬场工 · 见证者</span></p>
           <h3><span lang="en">Symmetric, cold, complete</span><span lang="zh">对称、冰冷、已完成</span></h3>
           <p><span lang="en">The Pyramid ships are monolithic, matte, almost windowless; the Witness is a silhouette with a void cut out of it. Perfection here reads as death, because a shape that can never change has stopped living. Pointed, vertical, dark: in Bang's terms, every choice is tuned to feel threatening, heavy and absolute.</span><span lang="zh">金字塔舰船是整块的、哑光的、几乎没有窗口；见证者是一个被挖空的剪影。在这里，完美被读作死亡，因为一个永远不能再改变的形状已经停止了生命。尖、竖直、暗：用 Bang 的话说，每个选择都被调到让人感到威胁、沉重而绝对。</span></p>
         </div>
@@ -223,11 +228,11 @@
     <p class="eyebrow">05 · <span lang="en">Meaning lives in relationships</span><span lang="zh">意义存在于关系之中</span></p>
     <h2><span lang="en">Same shape, three stories</span><span lang="zh">同一个形状，三种故事</span></h2>
     <div class="narrow">
-      <p><span lang="en">Here is the cottage-and-wilderness idea, tested. One pale sphere, unchanged. Only its surroundings move. Destiny uses exactly this trick with the Traveler: the same object reads as protector, prisoner or patient depending on what is around it.</span><span lang="zh">来验证一下"荒野中的小屋"这个想法。一个苍白的球体，完全不变，只改变它周围的环境。《命运》对旅者用的正是这个手法：同一个物体，因为周围的东西不同，可以被读成守护者、囚徒，或是病人。</span></p>
+      <p><span lang="en">Here is the cottage-and-wilderness idea, tested. One pale sphere, unchanged. Only its surroundings move. Destiny uses exactly this trick with the Traveler: the same object reads as protector, prisoner or patient depending on what is around it.</span><span lang="zh">来验证一下"荒野中的小屋"这个想法。一个苍白的球体，完全不变，只改变它周围的环境。《命运》对旅行者用的正是这个手法：同一个物体，因为周围的东西不同，可以被读成守护者、囚徒，或是病人。</span></p>
     </div>
     <div class="ctx">
       <div class="ctx-buttons" role="tablist" aria-label="Context">
-        <button role="tab" aria-selected="true" data-ctx="city"><span lang="en">Over the Last City</span><span lang="zh">悬于最后之城</span></button>
+        <button role="tab" aria-selected="true" data-ctx="city"><span lang="en">Over the Last City</span><span lang="zh">悬于最后的城市</span></button>
         <button role="tab" aria-selected="false" data-ctx="cage"><span lang="en">Caged by the Red Legion</span><span lang="zh">被红色军团囚笼</span></button>
         <button role="tab" aria-selected="false" data-ctx="void"><span lang="en">Facing the Pyramids</span><span lang="zh">面对金字塔舰队</span></button>
       </div>
@@ -235,7 +240,7 @@
       <div class="ctx-read" id="ctxRead"></div>
     </div>
     <h3 class="ev-title"><span lang="en">Bungie did this experiment for real</span><span lang="zh">Bungie 真的做过这个实验</span></h3>
-    <p class="ev-lead"><span lang="en">Eve Astra painted Osiris's Lighthouse twice for Curse of Osiris: once in the present, warm and radiant, and once in a Vex-ruled future, broken in red and blue. Same building, different context, opposite feeling. Next to them: the caged Traveler, a campfire on Europa, and a pocket of green in the burned EDZ.</span><span lang="zh">Eve Astra 为《奥西里斯的诅咒》把奥西里斯的灯塔画了两次：一次是现在，温暖而辉煌；一次是维克斯统治的未来，在红蓝色中破碎。同一座建筑，不同的语境，相反的感受。旁边是：被囚禁的旅者、欧罗巴的篝火、烧焦的欧洲无人区里一片绿色。</span></p>
+    <p class="ev-lead"><span lang="en">Eve Astra painted Osiris's Lighthouse twice for Curse of Osiris: once in the present, warm and radiant, and once in a Vex-ruled future, broken in red and blue. Same building, different context, opposite feeling. Next to them: the caged Traveler, a campfire on Europa, and a pocket of green in the burned EDZ.</span><span lang="zh">Eve Astra 为《冥王诅咒》把奥斯里斯的灯塔画了两次：一次是现在，温暖而辉煌；一次是Vex统治的未来，在红蓝色中破碎。同一座建筑，不同的语境，相反的感受。旁边是：被囚禁的旅行者、木卫二的篝火、烧焦的欧洲无人区里一片绿色。</span></p>
     <div class="evidence" data-ids="CO2,CO3,RW1,BL5,RW5,RW3"></div>
   </div>
 </section>
@@ -245,14 +250,14 @@
 <!-- ============ 05 BEYOND LIGHT LABS ============ -->
 <section id="labs" data-slide>
   <div class="wrap reveal">
-    <p class="eyebrow">06 · <span lang="en">Beyond Light</span><span lang="zh">凡人之外</span></p>
+    <p class="eyebrow">06 · <span lang="en">Beyond Light</span><span lang="zh">凌光之刻</span></p>
     <h2><span lang="en">The cold pleasure of an empty lab</span><span lang="zh">空旷实验室的冷感愉悦</span></h2>
     <div class="lab-grid">
       <div class="lab-art"><div class="evidence one" data-ids="BL8"></div></div>
       <div>
-        <p><span lang="en">Beyond Light (2020) takes Guardians to <strong>Europa</strong>, Jupiter's ice moon, and into the abandoned research facilities of <strong>Clovis Bray</strong>, the Golden Age corporation that invented the Exos by copying human minds into machine bodies. Outside: storms, blue ice, broken Fallen camps. Inside: long white corridors, recessed lighting, brushed steel, very few objects.</span><span lang="zh">《凡人之外》（2020）把守护者带到木星的冰卫星<strong>欧罗巴</strong>，进入黄金时代企业<strong>克洛维斯·布雷（Clovis Bray）</strong>废弃的研究设施。正是这家公司把人类意识复制进机械身体，造出了 Exo。外面是暴风雪、蓝冰和破败的堕落者营地；里面是长长的白色走廊、嵌入式灯光、拉丝金属，以及极少的物件。</span></p>
+        <p><span lang="en">Beyond Light (2020) takes Guardians to <strong>Europa</strong>, Jupiter's ice moon, and into the abandoned research facilities of <strong>Clovis Bray</strong>, the Golden Age corporation that invented the Exos by copying human minds into machine bodies. Outside: storms, blue ice, broken Fallen camps. Inside: long white corridors, recessed lighting, brushed steel, very few objects.</span><span lang="zh">《凌光之刻》（2020）把守护者带到木星的冰卫星<strong>木卫二</strong>，进入黄金时代企业<strong>克洛维斯·布瑞（Clovis Bray）</strong>废弃的研究设施。正是这家公司把人类意识复制进机械身体，造出了 Exo。外面是暴风雪、蓝冰和破败的堕落者营地；里面是长长的白色走廊、嵌入式灯光、拉丝金属，以及极少的物件。</span></p>
         <p><span lang="en">Why does emptiness feel so good, and so ominous? Read it with Bang: the light ground feels safe; the long horizontals feel calm; the center is empty, so your eye searches. And then context does the rest. You know what was done in these rooms. The sterility starts to read as moral sterility: a place so clean that nothing human could have lived in it.</span><span lang="zh">为什么空旷会让人既舒服又不安？用 Bang 的原则来读：浅色背景让人感到安全；长长的水平线让人平静；画面中心是空的，于是眼睛开始搜寻。然后语境完成剩下的部分：你知道这些房间里做过什么。洁净开始被读作道德上的"无菌"：一个干净到不可能有人性生活过的地方。</span></p>
-        <p><span lang="en">Beyond Light is also where Guardians first wield the Darkness, as <strong>Stasis</strong>: an ice-blue, crystalline power. Crystals are geometry that grows. Fittingly, it is the first hint that the Darkness is about order, about stopping things in place.</span><span lang="zh">《凡人之外》也是守护者第一次使用黑暗之力，也就是<strong>冰影（Stasis）</strong>：一种冰蓝色、结晶状的力量。晶体是"会生长的几何"。这恰好是第一个暗示：黑暗关乎秩序，关乎让一切停止在原地。</span></p>
+        <p><span lang="en">Beyond Light is also where Guardians first wield the Darkness, as <strong>Stasis</strong>: an ice-blue, crystalline power. Crystals are geometry that grows. Fittingly, it is the first hint that the Darkness is about order, about stopping things in place.</span><span lang="zh">《凌光之刻》也是守护者第一次使用黑暗之力，也就是<strong>冰影（Stasis）</strong>：一种冰蓝色、结晶状的力量。晶体是"会生长的几何"。这恰好是第一个暗示：黑暗关乎秩序，关乎让一切停止在原地。</span></p>
         <div class="evidence small" data-ids="BL2,BL6,BL7"></div>
         <p class="aside"><span lang="en">An engineer's note: this is the same lesson industrial designers use on medical and lab equipment. White, rounded casings and wide margins signal "safe and controlled." Destiny keeps the visual language of safety and removes the safety itself.</span><span lang="zh">工程师视角的一点补充：这和工业设计师在医疗、实验设备上用的是同一套语言。白色、圆角外壳、留白，传达"安全、受控"。《命运》保留了安全的视觉语言，却抽走了安全本身。</span></p>
       </div>
@@ -314,7 +319,7 @@
     <h2><span lang="en">The soundtrack, expansion by expansion</span><span lang="zh">原声带，一部一部听</span></h2>
     <div class="narrow">
       <p><span lang="en">Every track below is Bungie's official upload on YouTube. Press a track and it plays in a small player in the corner, so the music keeps going while you scroll through the art. Destiny's music was led for years by Michael Salvatori, with Skye Lewin, Josh Mosser, Michael Sechrist and others; Destiny 2's first score also features the Kronos Quartet ("Journey").</span><span lang="zh">下面每一首都是 Bungie 在 YouTube 上的官方上传。点击曲目后，它会在页面角落的小播放器里播放，你可以一边听一边继续浏览作品。《命运》的音乐多年来由 Michael Salvatori 主导，Skye Lewin、Josh Mosser、Michael Sechrist 等人共同创作；《命运2》初版原声还邀请了克罗诺斯四重奏（Kronos Quartet，曲目《Journey》）。</span></p>
-      <p class="aside"><span lang="en">Try it with the gallery: play "Journey" and look at Sung Choi's painting of the same name; play "Deep Stone Lullaby" and look at the Braytech labs. Music, like a background, changes what a shape means.</span><span lang="zh">配合作品集试一试：播放《Journey》，同时看 Sung Choi 同名的那张画；播放《Deep Stone Lullaby》，同时看布雷科技的实验室。音乐和背景一样，会改变一个形状的意义。</span></p>
+      <p class="aside"><span lang="en">Try it with the gallery: play "Journey" and look at Sung Choi's painting of the same name; play "Deep Stone Lullaby" and look at the Braytech labs. Music, like a background, changes what a shape means.</span><span lang="zh">配合作品集试一试：播放《Journey》，同时看 Sung Choi 同名的那张画；播放《Deep Stone Lullaby》，同时看布瑞科技的实验室。音乐和背景一样，会改变一个形状的意义。</span></p>
     </div>
     <div class="ost-grid" id="ostGrid"></div>
   </div>
@@ -369,15 +374,15 @@
 <!-- ============ 11 DISCUSS ============ -->
 <section id="talk" data-slide>
   <div class="wrap reveal narrow">
-    <p class="eyebrow">11 · <span lang="en">For the conversation</span><span lang="zh">带去交流的问题</span></p>
-    <h2><span lang="en">Questions worth asking an illustrator</span><span lang="zh">值得问一位插画家的问题</span></h2>
+    <p class="eyebrow">11 · <span lang="en">Open questions</span><span lang="zh">留给观者的问题</span></p>
+    <h2><span lang="en">Questions to keep looking with</span><span lang="zh">带着这些问题继续看</span></h2>
     <div class="questions">
       <div class="q"><p><span lang="en">Bang's principles describe single pictures. In a game the player moves the frame. Which of her principles survive when the viewer controls the camera, and which break?</span><span lang="zh">Bang 的原则针对的是单张图画。而在游戏里，是玩家在移动画框。当观者控制镜头时，哪些原则仍然成立，哪些会失效？</span></p></div>
       <div class="q"><p><span lang="en">The Witness is the most abstract villain in the series: a silhouette with a hole cut in it. Is abstraction more frightening than a detailed monster? Why?</span><span lang="zh">见证者是整个系列最抽象的反派：一个被挖了洞的剪影。抽象是否比细节丰富的怪物更可怕？为什么？</span></p></div>
       <div class="q"><p><span lang="en">The Pale Heart rebuilds familiar places from earlier games as memories. How does an illustrator make a place read as "remembered" rather than "real"?</span><span lang="zh">苍白之心把早期游戏里熟悉的地点作为"记忆"重建。插画家如何让一个地方读起来像"被记住的"而不是"真实的"？</span></p></div>
-      <div class="q"><p><span lang="en">Neomuna (Lightfall) was criticized by many players for feeling off-tone, too bright and clean for Destiny. Is that a failure of design or of context?</span><span lang="zh">《光陨之秋》的新蒙纳被许多玩家批评"调性不对"，对《命运》来说太亮、太干净。这是设计的失败，还是语境的失败？</span></p></div>
-      <div class="q"><p><span lang="en">Savathûn's design pairs moth wings with a crown and a soft, almost elegant silhouette, against Oryx's aggressive bat wings. How much of a character can a silhouette carry?</span><span lang="zh">萨瓦图恩的设计用蛾翼、王冠和柔和而近乎优雅的剪影，与欧瑞克斯咄咄逼人的蝙蝠翼形成对比。一个剪影能承载多少角色性格？</span></p></div>
-      <div class="q"><p><span lang="en">For someone who designs robots: if meaning comes from context, can a machine's casing or the lettering beside a switch be designed to make people feel trust, care or wariness?</span><span lang="zh">对于一个做机器人的人来说：如果意义来自语境，那么机器的外壳、开关旁的字样，是否可以被设计成让人感到信任、关怀或警惕？</span></p></div>
+      <div class="q"><p><span lang="en">Neomuna (Lightfall) was criticized by many players for feeling off-tone, too bright and clean for Destiny. Is that a failure of design or of context?</span><span lang="zh">《光陨之秋》的内欧姆那被许多玩家批评"调性不对"，对《命运》来说太亮、太干净。这是设计的失败，还是语境的失败？</span></p></div>
+      <div class="q"><p><span lang="en">Savathûn's design pairs moth wings with a crown and a soft, almost elegant silhouette, against Oryx's aggressive bat wings. How much of a character can a silhouette carry?</span><span lang="zh">萨瓦图恩的设计用蛾翼、王冠和柔和而近乎优雅的剪影，与欧里克斯咄咄逼人的蝙蝠翼形成对比。一个剪影能承载多少角色性格？</span></p></div>
+      <div class="q"><p><span lang="en">Beyond Light's Stasis is Darkness made into crystal: hard, faceted, cold. Why does the series keep reaching for geometry, rather than shadow or rot, when it wants to show the Dark?</span><span lang="zh">《凌光之刻》的冰影是被凝结成晶体的暗影：坚硬、多面、寒冷。为什么这个系列每次想表现黑暗时，选择的是几何，而不是阴影或腐朽？</span></p></div>
     </div>
   </div>
 </section>
@@ -413,13 +418,13 @@
       <li id="src-12">Molly Bang, <i>Picture This: How Pictures Work</i> (SeaStar Books, 1991; revised edition, Chronicle Books, 2016).</li>
       <li id="src-14"><span lang="en">Artwork in the gallery: each artist's public ArtStation portfolio (linked on every card) and ArtStation Magazine's Bungie art blasts: </span><span lang="zh">作品集中的图片：每位艺术家公开的 ArtStation 作品集（每张卡片上都有链接），以及 ArtStation Magazine 的 Bungie 作品专题：</span><a href="https://magazine.artstation.com/2024/09/bungie-10-year-destiny-art-blast/" target="_blank" rel="noopener">10 Years of Destiny</a>, <a href="https://magazine.artstation.com/2022/03/bungie-destiny-2-the-witch-queen-art-blast/" target="_blank" rel="noopener">The Witch Queen</a>, <a href="https://magazine.artstation.com/2023/03/bungie-destiny-2-lightfall-art-blast/" target="_blank" rel="noopener">Lightfall</a>, <a href="https://magazine.artstation.com/2024/06/bungie-destiny-2-the-final-shape/" target="_blank" rel="noopener">The Final Shape</a>, <a href="https://magazine.artstation.com/2025/08/bungie-destiny-2-the-edge-of-fate-art-blast/" target="_blank" rel="noopener">The Edge of Fate</a>, <a href="https://magazine.artstation.com/2025/12/bungie-destiny-2-renegades-art-blast/" target="_blank" rel="noopener">Renegades</a>.</li>
       <li id="src-15"><span lang="en">Soundtrack: official uploads on Bungie's / Destiny 2's YouTube channels.</span><span lang="zh">原声：Bungie / Destiny 2 官方 YouTube 频道的上传。</span></li>
-      <li id="src-13"><span lang="en">Primary sources to explore in the game itself: the lore books <i>Books of Sorrow</i> (Hive origins), <i>Unveiling</i> (the Gardener and the Winnower, Shadowkeep), and <i>Lucent Moth</i> (The Witch Queen); and Bungie's ViDocs released before each expansion on Bungie's official YouTube channel.</span><span lang="zh">游戏内可以继续探索的一手资料：传说书《哀伤之书》（邪魔起源）、《揭示》（园丁与筛选者，暗影要塞）、《光蛾》（邪姬魅影）；以及 Bungie 在每部资料片发售前于官方 YouTube 频道发布的 ViDoc 开发纪录片。</span></li>
+      <li id="src-13"><span lang="en">Primary sources to explore in the game itself: the lore books <i>Books of Sorrow</i> (Hive origins), <i>Unveiling</i> (the Gardener and the Winnower, Shadowkeep), and <i>Lucent Moth</i> (The Witch Queen); and Bungie's ViDocs released before each expansion on Bungie's official YouTube channel.</span><span lang="zh">游戏内可以继续探索的一手资料：传说书《哀伤之书》（邪魔起源）、《揭示》（园丁与扬场工，暗影要塞）、《光蛾》（邪姬魅影）；以及 Bungie 在每部资料片发售前于官方 YouTube 频道发布的 ViDoc 开发纪录片。</span></li>
     </ol>
-    <p class="disclaimer"><span lang="en">A fan study made for learning and discussion. Destiny and Destiny 2 are trademarks of Bungie, Inc. Concept art in the gallery is © Bungie, Inc. and the credited artists. It is shown for non-commercial study and commentary, credited on every card, and loaded directly from the artists' ArtStation posts rather than copied into this site. The diagrams (hero, playgrounds, faction glyphs) are original SVG. Soundtrack videos are embedded from official YouTube uploads. Quotes are short excerpts from the cited articles; lore summaries are paraphrased.</span><span lang="zh">这是一份用于学习与讨论的粉丝研究。Destiny 与 Destiny 2 是 Bungie, Inc. 的商标。作品集中的概念美术版权归 Bungie, Inc. 及署名艺术家所有，仅用于非商业的学习与评论，每张卡片都注明作者，图片直接从艺术家的 ArtStation 页面加载，而不是复制到本站。示意图（首页、互动演示、种族图形）为原创 SVG。原声视频嵌入自官方 YouTube 上传。引文为所引文章中的简短摘录；世界观内容为转述。</span></p>
+    <p class="disclaimer"><span lang="en">An independent study of how Destiny 2's art works, made for learning and discussion. Destiny and Destiny 2 are trademarks of Bungie, Inc. Concept art in the gallery is © Bungie, Inc. and the credited artists. It is shown for non-commercial study and commentary, credited on every card, and loaded directly from the artists' ArtStation posts rather than copied into this site. The diagrams (hero, playgrounds, faction glyphs) are original SVG. Soundtrack videos are embedded from official YouTube uploads. Quotes are short excerpts from the cited articles; lore summaries are paraphrased.</span><span lang="zh">这是一份关于《命运2》美术如何运作的独立研究，用于学习与讨论。Destiny 与 Destiny 2 是 Bungie, Inc. 的商标。作品集中的概念美术版权归 Bungie, Inc. 及署名艺术家所有，仅用于非商业的学习与评论，每张卡片都注明作者，图片直接从艺术家的 ArtStation 页面加载，而不是复制到本站。示意图（首页、互动演示、种族图形）为原创 SVG。原声视频嵌入自官方 YouTube 上传。引文为所引文章中的简短摘录；世界观内容为转述。</span></p>
   </div>
 </section>
 
-<footer class="site"><span lang="en">Light &amp; Shape · made for a conversation about art</span><span lang="zh">光与形 · 为一次关于艺术的交流而作</span></footer>
+<footer class="site"><span lang="en">Light &amp; Shape · reading the art of Destiny 2</span><span lang="zh">光与形 · 剖析《命运2》的美术</span></footer>
 
 <div class="hint" id="hint"><span lang="en">← → to move between sections · Esc to exit</span><span lang="zh">← → 切换章节 · Esc 退出</span></div>
 
@@ -435,8 +440,9 @@
   <div class="pl-frame" id="plFrame"></div>
 </div>
 
-<script src="data.js?v=2"></script>
-<script src="art.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="data.js?v=3"></script>
+<script src="art.js?v=3"></script>
+<script src="art2.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

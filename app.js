@@ -272,10 +272,10 @@
   })();
 
   function card(a, i) {
-    return '<article class="art-card"><button type="button" class="art-img" data-open="' + i + '" aria-label="' + esc(a.title.en) + '"><img loading="lazy" src="' + a.img + '" alt="' + esc(a.title.en) + " by " + esc(a.artist) + '"><span class="art-id">' + a.id + "</span></button>" +
+    return '<article class="art-card"><button type="button" class="art-img" data-open="' + i + '" aria-label="' + esc(a.title.en) + '"><img loading="lazy" draggable="false" src="' + a.img + '" alt="' + esc(a.title.en) + " by " + esc(a.artist) + '"><span class="art-id">' + a.id + "</span></button>" +
       '<div class="art-body"><h3>' + esc(a.title[lang]) + '</h3><p class="by">' + artistLink(a) + "</p>" +
-      "<h4>" + L("How it is designed", "设计手法") + "</h4><p>" + esc(a.how[lang]) + "</p>" +
-      '<h4 class="st">' + L("How it echoes the story", "与故事的呼应") + "</h4><p>" + esc(a.story[lang]) + "</p></div></article>";
+      "<h4>" + L("How it is designed", "设计手法") + '</h4><p class="clamp">' + esc(a.how[lang]) + "</p>" +
+      '<button type="button" class="more" data-open="' + i + '">' + L("Read the full analysis →", "阅读完整解读 →") + "</button></div></article>";
   }
   function trackBtns(c) {
     return c.ost.map(function (t) { return '<button type="button" class="trk" data-v="' + t.v + '" data-t="' + esc(c.name.en + " · " + t.t) + '"><span>▶</span>' + esc(t.t) + "</button>"; }).join("");
@@ -293,16 +293,43 @@
       head.style.setProperty("--c", c.pal[0]);
       head.innerHTML = '<div class="gh-top"><div><p class="tagline">' + c.year + " · " + c.art.length + L(" pieces", " 张作品") + "</p><h3>" + esc(c.name[lang]) + '</h3></div><div class="swatches">' + c.pal.map(function (p) { return '<i style="background:' + p + '"></i>'; }).join("") + "</div></div>" +
         '<p class="gh-intro">' + c.intro[lang] + "</p>" +
-        '<div class="gh-ost"><span class="lbl">' + L("Soundtrack", "原声") + "</span>" + trackBtns(c) + '<a class="blast" href="' + c.blast + '" target="_blank" rel="noopener">' + L("ArtStation art blast ↗", "ArtStation 作品专题 ↗") + "</a></div>";
+        '<div class="gh-ost">' + (c.ost.length ? '<span class="lbl">' + L("Soundtrack", "原声") + "</span>" + trackBtns(c) : "") + '<a class="blast" href="' + c.blast + '" target="_blank" rel="noopener">' + L("ArtStation art blast ↗", "ArtStation 作品专题 ↗") + "</a></div>";
       grid.innerHTML = c.art.map(function (a, i) { return card(a, i); }).join("");
+      grid.classList.toggle("one-row", c.art.length <= 4);
+      grid.scrollLeft = 0; bar();
       $("#galCount").textContent = (cur + 1) + " / " + ART.length;
     }
     function step(d) {
       cur = (cur + d + ART.length) % ART.length; draw();
       var sel = rail.querySelector('[aria-selected="true"]'); if (sel && sel.scrollIntoView) sel.scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
     }
+    function bar() {
+      var max = grid.scrollWidth - grid.clientWidth, f = max > 0 ? grid.scrollLeft / max : 1;
+      var w = max > 0 ? grid.clientWidth / grid.scrollWidth : 1;
+      $("#gsBar").style.width = (w * 100) + "%"; $("#gsBar").style.marginLeft = (f * (1 - w) * 100) + "%";
+      $(".gs-prev").disabled = grid.scrollLeft < 4; $(".gs-next").disabled = grid.scrollLeft > max - 4;
+    }
+    function page(d) {
+      var col = grid.querySelector(".art-card"); var w = col ? col.getBoundingClientRect().width + 22 : 340;
+      grid.scrollBy({ left: d * Math.max(w, Math.floor(grid.clientWidth / w) * w), behavior: reduce ? "auto" : "smooth" });
+    }
+    grid.addEventListener("scroll", bar, { passive: true });
+    window.addEventListener("resize", bar);
+    $(".gal-scroller").addEventListener("click", function (e) { var b = e.target.closest("[data-gs]"); if (b) page(+b.dataset.gs); });
+    /* mouse drag-to-scroll; touch and trackpads scroll natively */
+    var drag = null, moved = false;
+    grid.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse" || e.button !== 0) return; drag = { x: e.clientX, l: grid.scrollLeft }; moved = false; });
+    window.addEventListener("pointermove", function (e) {
+      if (!drag) return; var dx = e.clientX - drag.x;
+      if (!moved && Math.abs(dx) > 6) { moved = true; grid.classList.add("dragging"); }
+      if (moved) grid.scrollLeft = drag.l - dx;
+    });
+    window.addEventListener("pointerup", function () { if (drag) { drag = null; grid.classList.remove("dragging"); } });
     rail.addEventListener("click", function (e) { var b = e.target.closest("button[data-i]"); if (b) { cur = +b.dataset.i; draw(); } });
-    grid.addEventListener("click", function (e) { var b = e.target.closest("[data-open]"); if (b) openLB(ids(), +b.dataset.open); });
+    grid.addEventListener("click", function (e) {
+      if (moved) { moved = false; e.preventDefault(); return; }
+      var b = e.target.closest("[data-open]"); if (b) openLB(ids(), +b.dataset.open);
+    }, true);
     $(".gal-nav").addEventListener("click", function (e) { var b = e.target.closest("[data-gstep]"); if (b) { step(+b.dataset.gstep); $("#gallery").scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); } });
     window.__xpStep = step;
     renderers.push(draw);
@@ -335,7 +362,7 @@
     $("#plClose").addEventListener("click", function () { player.hidden = true; $("#plFrame").innerHTML = ""; });
     $("#plMin").addEventListener("click", function () { player.classList.toggle("min"); });
     if (grid) renderers.push(function () {
-      grid.innerHTML = ART.map(function (c) {
+      grid.innerHTML = ART.filter(function (c) { return c.ost.length; }).map(function (c) {
         return '<div class="ost-ch" style="--c:' + c.pal[0] + '"><p class="y">' + c.year + "</p><h3>" + esc(c.name[lang]) + '</h3><div class="trks">' + trackBtns(c) + "</div></div>";
       }).join("");
     });
