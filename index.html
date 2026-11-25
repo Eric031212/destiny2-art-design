@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Light and Shape</title>
+<meta name="description" content="An interactive, bilingual (English / 中文) study of the art direction, visual philosophy and story of Bungie's Destiny 2, across every expansion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='%23f4efe2'/%3E%3Cpath d='M16 5 L14 16 L18 27' stroke='%2307080c' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="#f4efe2"/><path d="M16 5 L14 16 L18 27" stroke="#07080c" stroke-width="1.6" fill="none"/></svg>
+    <span lang="en">Light &amp; Shape</span><span lang="zh">光与形</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#question"><span lang="en">Question</span><span lang="zh">问题</span></a></li>
+    <li><a href="#lens"><span lang="en">Lens</span><span lang="zh">方法</span></a></li>
+    <li><a href="#shape"><span lang="en">Final Shape</span><span lang="zh">终焉之形</span></a></li>
+    <li><a href="#expansions"><span lang="en">Expansions</span><span lang="zh">全部资料片</span></a></li>
+    <li><a href="#factions"><span lang="en">Factions</span><span lang="zh">种族</span></a></li>
+    <li><a href="#lore"><span lang="en">Lore</span><span lang="zh">世界观</span></a></li>
+    <li><a href="#talk"><span lang="en">Discuss</span><span lang="zh">讨论</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="present-btn" id="presentBtn" type="button"><span lang="en">Present ⛶</span><span lang="zh">演示 ⛶</span></button>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top" data-slide>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <svg class="traveler" viewBox="0 0 300 300" role="img" aria-label="An original drawing of a pale sphere with a cracked, broken shell">
+      <defs>
+        <radialGradient id="orbG" cx="38%" cy="32%" r="75%">
+          <stop offset="0" stop-color="#ffffff"/>
+          <stop offset=".55" stop-color="#e9e3d4"/>
+          <stop offset="1" stop-color="#8f8a7d"/>
+        </radialGradient>
+        <radialGradient id="glowG"><stop offset="0" stop-color="#f4efe2" stop-opacity=".35"/><stop offset="1" stop-color="#f4efe2" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="150" cy="150" r="148" fill="url(#glowG)"/>
+      <g class="halo" fill="none" stroke="#e8c77a" stroke-opacity=".35">
+        <circle cx="150" cy="150" r="128" stroke-dasharray="2 10"/>
+        <circle cx="150" cy="150" r="138" stroke-dasharray="40 6 2 6" stroke-opacity=".2"/>
+      </g>
+      <g class="orb">
+        <circle cx="150" cy="150" r="100" fill="url(#orbG)"/>
+        <!-- broken shell fragments -->
+        <path d="M150 50 A100 100 0 0 1 238 100 L212 112 L196 92 L176 98 L160 70 Z" fill="#d9d2c1" opacity=".9"/>
+        <path d="M150 50 L160 70 L148 104 L156 140 L140 176 L152 214 L146 250" stroke="#2a2822" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+        <path d="M148 104 L120 116 L104 102" stroke="#2a2822" stroke-width="1.4" fill="none"/>
+        <path d="M156 140 L188 150 L204 176" stroke="#2a2822" stroke-width="1.4" fill="none"/>
+        <path d="M140 176 L110 190" stroke="#2a2822" stroke-width="1.2" fill="none"/>
+        <ellipse cx="118" cy="110" rx="34" ry="22" fill="#fff" opacity=".35"/>
+      </g>
+    </svg>
+    <p class="eyebrow"><span lang="en">An interactive study · Bungie's Destiny 2</span><span lang="zh">一份可互动的研究 · Bungie《命运2》</span></p>
+    <h1><span lang="en">Light <em>&amp;</em> Shape</span><span lang="zh">光<em>与</em>形</span></h1>
+    <p class="sub">
+      <span lang="en">How a game turns metaphysics into form: the art direction, visual language and story of Destiny 2, from the Red War to the Final Shape and beyond.</span>
+      <span lang="zh">一款游戏如何把形而上的思想变成可以看见的形状：《命运2》的美术方向、视觉语言与故事，从红色战争到终焉之形，再到之后。</span>
+    </p>
+    <a class="scroll-cue" href="#question"><span lang="en">Begin</span><span lang="zh">开始</span><span class="line"></span></a>
+  </div>
+</header>
+
+<!-- ============ 01 THE QUESTION ============ -->
+<section id="question" data-slide>
+  <div class="wrap narrow reveal">
+    <p class="eyebrow">01 · <span lang="en">The question</span><span lang="zh">问题的起点</span></p>
+    <h2><span lang="en">Why does a clean edge feel unsettling?</span><span lang="zh">为什么一条干净的边缘会让人不安？</span></h2>
+    <p class="lead">
+      <span lang="en">In The Final Shape, the eye travels from something that looks alive to a shape with an impossibly clean edge. It is beautiful, and a little wrong. In Beyond Light, the spare laboratory interiors give a different, colder pleasure. You can point to the individual choices you like. The harder question is how they work together to produce such a distinct feeling.</span>
+      <span lang="zh">在《终焉之形》里，视线会从一个"看起来活着"的东西，移到一个边缘干净得不可能的形状上。它很美，又带着一点不对劲。在《凡人之外》里，那些极简的实验室内景带来另一种更冷的愉悦。我们能指出自己喜欢的某个具体选择，但更难的问题是：这些选择是怎样组合在一起，产生如此独特的感受的？</span>
+    </p>
+    <p>
+      <span lang="en">This site grew out of a conversation with an illustrator who teaches game design at RISD. Their reply, written without having played the game, landed on the contrast between organic and inorganic forms, which happens to be the central conflict of Destiny's story. Their second point is the thread through everything below:</span>
+      <span lang="zh">这个网站源自与一位在 RISD 教游戏设计的插画家的交流。对方没有玩过这款游戏，却一眼看出了"有机形态与无机形态的对比"，而这恰好就是《命运》故事的核心冲突。对方的第二个观点，贯穿了下面所有内容：</span>
+    </p>
+    <blockquote class="pullquote">
+      <span lang="en">The emotional meaning of a form is not inside the form. It emerges from its relationship to its surroundings and to the story around it.</span>
+      <span lang="zh">一个形状的情感意义并不在形状本身，而是从它与周围环境、与它所处叙事的关系中浮现出来的。</span>
+      <footer><span lang="en">Paraphrased from the conversation: a cottage surrounded by wilderness, an infant surrounded by machinery.</span><span lang="zh">转述自那次交流：被荒野包围的小屋，被机器包围的婴儿。</span></footer>
+    </blockquote>
+    <div class="thesis-grid">
+      <div><span class="num">I</span><h3><span lang="en">Form</span><span lang="zh">形</span></h3><p><span lang="en">Shapes carry feeling: round or pointed, flat or upright, light or dark.</span><span lang="zh">形状本身带有情绪：圆或尖，平或立，明或暗。</span></p></div>
+      <div><span class="num">II</span><h3><span lang="en">Relation</span><span lang="zh">关系</span></h3><p><span lang="en">A shape changes meaning depending on what surrounds it.</span><span lang="zh">同一个形状，放在不同环境中意义会改变。</span></p></div>
+      <div><span class="num">III</span><h3><span lang="en">Story</span><span lang="zh">叙事</span></h3><p><span lang="en">Destiny's lore gives every shape a side in a cosmic argument.</span><span lang="zh">《命运》的世界观让每个形状都在一场宇宙级的辩论中站了队。</span></p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 02 LENS: PICTURE THIS ============ -->
+<section id="lens" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">02 · <span lang="en">A lens to see with</span><span lang="zh">一副观看的镜片</span></p>
+    <h2><span lang="en">Molly Bang's <i>Picture This</i></span><span lang="zh">Molly Bang《Picture This》</span></h2>
+    <div class="narrow">
+      <p>
+        <span lang="en">Molly Bang's <i>Picture This: How Pictures Work</i> (1991) explains composition using nothing but cut paper: a red triangle, black rectangles, a white page. From those, she builds Little Red Riding Hood and pulls out a small set of principles about how simple shapes make us feel. They are a good toolkit for reading Destiny, because Bungie's best images also work when reduced to a few flat shapes. Try them below.</span>
+        <span lang="zh">Molly Bang 的《Picture This: How Pictures Work》（1991）只用剪纸来讲构图：一个红色三角形、几个黑色矩形、一张白纸。她用这些拼出了"小红帽"的故事，并总结出一组关于"简单形状如何让我们产生感受"的原则。这是阅读《命运》的好工具，因为 Bungie 最好的画面即使简化成几个平面形状也依然成立。下面可以亲手试试。</span>
+      </p>
+    </div>
+
+    <div class="bang">
+      <div class="bang-stage" aria-live="polite">
+        <svg id="bangSvg" viewBox="0 0 400 300" role="img" aria-label="Composition playground"></svg>
+      </div>
+      <div class="bang-controls">
+        <fieldset><legend><span lang="en">Orientation</span><span lang="zh">方向</span></legend>
+          <label><input type="radio" name="b-or" value="h" checked><span lang="en">Horizontal</span><span lang="zh">水平</span></label>
+          <label><input type="radio" name="b-or" value="v"><span lang="en">Vertical</span><span lang="zh">垂直</span></label>
+          <label><input type="radio" name="b-or" value="d"><span lang="en">Diagonal</span><span lang="zh">斜向</span></label>
+        </fieldset>
+        <fieldset><legend><span lang="en">Edge</span><span lang="zh">边缘</span></legend>
+          <label><input type="radio" name="b-ed" value="r" checked><span lang="en">Rounded</span><span lang="zh">圆润</span></label>
+          <label><input type="radio" name="b-ed" value="p"><span lang="en">Pointed</span><span lang="zh">尖锐</span></label>
+        </fieldset>
+        <fieldset><legend><span lang="en">Placement</span><span lang="zh">位置</span></legend>
+          <label><input type="radio" name="b-pl" value="hi"><span lang="en">High</span><span lang="zh">上方</span></label>
+          <label><input type="radio" name="b-pl" value="mid" checked><span lang="en">Center</span><span lang="zh">中心</span></label>
+          <label><input type="radio" name="b-pl" value="lo"><span lang="en">Low</span><span lang="zh">下方</span></label>
+        </fieldset>
+        <fieldset><legend><span lang="en">Ground</span><span lang="zh">背景</span></legend>
+          <label><input type="radio" name="b-gr" value="light"><span lang="en">Light</span><span lang="zh">亮</span></label>
+          <label><input type="radio" name="b-gr" value="dark" checked><span lang="en">Dark</span><span lang="zh">暗</span></label>
+        </fieldset>
+        <fieldset><legend><span lang="en">Scale</span><span lang="zh">尺度</span></legend>
+          <label><input type="radio" name="b-sc" value="s" checked><span lang="en">Small</span><span lang="zh">小</span></label>
+          <label><input type="radio" name="b-sc" value="l"><span lang="en">Large</span><span lang="zh">大</span></label>
+        </fieldset>
+        <div class="bang-read" id="bangRead"></div>
+      </div>
+    </div>
+
+    <div class="principles" id="principles"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 03 ORGANIC VS GEOMETRIC ============ -->
+<section id="shape" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">03 · <span lang="en">The central contrast</span><span lang="zh">核心对比</span></p>
+    <h2><span lang="en">The living and the final</span><span lang="zh">生长之物与终焉之形</span></h2>
+    <div class="narrow">
+      <p>
+        <span lang="en">Destiny's two cosmic forces are not simply good and evil. Lore calls them the <strong>Gardener</strong> and the <strong>Winnower</strong>: one tends a garden where anything may grow, the other believes only what survives the culling deserves to exist. By The Final Shape, the Darkness has a face, the <strong>Witness</strong>, and a goal: to impose one permanent, perfect shape on the universe and end change, uncertainty and suffering for good.</span>
+        <span lang="zh">《命运》里的两种宇宙力量并非简单的善与恶。设定中称它们为<strong>园丁（Gardener）</strong>与<strong>筛选者（Winnower）</strong>：一个照料花园，允许任何东西生长；另一个认为只有经过筛选而幸存的东西才配存在。到了《终焉之形》，黑暗有了面孔，也就是<strong>见证者（Witness）</strong>，它的目标是把一个永恒而完美的形状强加给宇宙，从此终结变化、不确定性与痛苦。</span>
+      </p>
+      <p>
+        <span lang="en">So the art team had to make a philosophy visible. Drag the slider and watch the same form move from one side of the argument to the other.</span>
+        <span lang="zh">所以美术团队必须让一种哲学变得可见。拖动滑块，看同一个形态如何从辩论的一方走向另一方。</span>
+      </p>
+    </div>
+    <div class="duality">
+      <div class="duality-stage">
+        <svg id="dualSvg" viewBox="0 0 400 400" role="img" aria-label="A form morphing from organic growth to rigid geometry"></svg>
+      </div>
+      <div class="duality-text">
+        <div class="slider-row"><span class="l"><span lang="en">Garden</span><span lang="zh">花园</span></span><input id="dualRange" type="range" min="0" max="100" value="0" aria-label="Organic to geometric"><span class="d"><span lang="en">Final Shape</span><span lang="zh">终焉之形</span></span></div>
+        <div class="side on" data-side="0">
+          <p class="tag" style="color:var(--gold)"><span lang="en">Light · Gardener · growth</span><span lang="zh">光 · 园丁 · 生长</span></p>
+          <h3><span lang="en">Irregular, warm, unfinished</span><span lang="zh">不规则、温暖、未完成</span></h3>
+          <p><span lang="en">The Light's world is full of things that are still becoming: overgrown ruins of the Golden Age, trees through concrete, flowing cloth on Guardian armor, the Traveler itself cracked and asymmetric. Imperfection reads as life, because only living things are allowed to be unfinished.</span><span lang="zh">光的世界充满"仍在生成中"的东西：被植被吞没的黄金时代废墟，穿透混凝土的树，守护者盔甲上飘动的布料，以及本身就破碎不对称的旅者。不完美被读作生命，因为只有活着的东西才可以"还没完成"。</span></p>
+        </div>
+        <div class="side" data-side="1">
+          <p class="tag" style="color:#c9b8ff"><span lang="en">The border · Pale Heart</span><span lang="zh">交界 · 苍白之心</span></p>
+          <h3><span lang="en">Life meeting an edge</span><span lang="zh">生命撞上一条边</span></h3>
+          <p><span lang="en">This is the moment the eye loves and fears: soft, grown forms meeting a perfectly flat, perfectly black plane. Inside the Traveler, in the Pale Heart, memory-landscapes and Darkness monoliths coexist. Bang's rule applies: contrast is what lets us see. The clean edge only feels impossible because something alive sits next to it.</span><span lang="zh">这正是让眼睛既着迷又害怕的瞬间：柔软的、生长出来的形态，撞上一块绝对平整、绝对漆黑的平面。在旅者内部的苍白之心里，记忆中的风景与黑暗巨石并存。Bang 的原则在这里成立：对比让我们看见。那条干净的边之所以显得"不可能"，正是因为它旁边有活着的东西。</span></p>
+        </div>
+        <div class="side" data-side="2">
+          <p class="tag" style="color:#8f86ff"><span lang="en">Darkness · Winnower · the Witness</span><span lang="zh">黑暗 · 筛选者 · 见证者</span></p>
+          <h3><span lang="en">Symmetric, cold, complete</span><span lang="zh">对称、冰冷、已完成</span></h3>
+          <p><span lang="en">The Pyramid ships are monolithic, matte, almost windowless; the Witness is a silhouette with a void cut out of it. Perfection here reads as death, because a shape that can never change has stopped living. Pointed, vertical, dark: in Bang's terms, every choice is tuned to feel threatening, heavy and absolute.</span><span lang="zh">金字塔舰船是整块的、哑光的、几乎没有窗口；见证者是一个被挖空的剪影。在这里，完美被读作死亡，因为一个永远不能再改变的形状已经停止了生命。尖、竖直、暗：用 Bang 的话说，每个选择都被调到让人感到威胁、沉重而绝对。</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 04 CONTEXT ============ -->
+<section id="context" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">04 · <span lang="en">Meaning lives in relationships</span><span lang="zh">意义存在于关系之中</span></p>
+    <h2><span lang="en">Same shape, three stories</span><span lang="zh">同一个形状，三种故事</span></h2>
+    <div class="narrow">
+      <p><span lang="en">Here is the cottage-and-wilderness idea, tested. One pale sphere, unchanged. Only its surroundings move. Destiny uses exactly this trick with the Traveler: the same object reads as protector, prisoner or patient depending on what is around it.</span><span lang="zh">来验证一下"荒野中的小屋"这个想法。一个苍白的球体，完全不变，只改变它周围的环境。《命运》对旅者用的正是这个手法：同一个物体，因为周围的东西不同，可以被读成守护者、囚徒，或是病人。</span></p>
+    </div>
+    <div class="ctx">
+      <div class="ctx-buttons" role="tablist" aria-label="Context">
+        <button role="tab" aria-selected="true" data-ctx="city"><span lang="en">Over the Last City</span><span lang="zh">悬于最后之城</span></button>
+        <button role="tab" aria-selected="false" data-ctx="cage"><span lang="en">Caged by the Red Legion</span><span lang="zh">被红色军团囚笼</span></button>
+        <button role="tab" aria-selected="false" data-ctx="void"><span lang="en">Facing the Pyramids</span><span lang="zh">面对金字塔舰队</span></button>
+      </div>
+      <div class="ctx-stage"><svg id="ctxSvg" viewBox="0 0 800 360" role="img" aria-label="The same sphere in three contexts"></svg></div>
+      <div class="ctx-read" id="ctxRead"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 05 BEYOND LIGHT LABS ============ -->
+<section id="labs" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">05 · <span lang="en">Beyond Light</span><span lang="zh">凡人之外</span></p>
+    <h2><span lang="en">The cold pleasure of an empty lab</span><span lang="zh">空旷实验室的冷感愉悦</span></h2>
+    <div class="lab-grid">
+      <div class="lab-art"><svg id="labSvg" viewBox="0 0 480 320" role="img" aria-label="An original drawing of a spare white laboratory corridor with a frozen window"></svg></div>
+      <div>
+        <p><span lang="en">Beyond Light (2020) takes Guardians to <strong>Europa</strong>, Jupiter's ice moon, and into the abandoned research facilities of <strong>Clovis Bray</strong>, the Golden Age corporation that invented the Exos by copying human minds into machine bodies. Outside: storms, blue ice, broken Fallen camps. Inside: long white corridors, recessed lighting, brushed steel, very few objects.</span><span lang="zh">《凡人之外》（2020）把守护者带到木星的冰卫星<strong>欧罗巴</strong>，进入黄金时代企业<strong>克洛维斯·布雷（Clovis Bray）</strong>废弃的研究设施。正是这家公司把人类意识复制进机械身体，造出了 Exo。外面是暴风雪、蓝冰和破败的堕落者营地；里面是长长的白色走廊、嵌入式灯光、拉丝金属，以及极少的物件。</span></p>
+        <p><span lang="en">Why does emptiness feel so good, and so ominous? Read it with Bang: the light ground feels safe; the long horizontals feel calm; the center is empty, so your eye searches. And then context does the rest. You know what was done in these rooms. The sterility starts to read as moral sterility: a place so clean that nothing human could have lived in it.</span><span lang="zh">为什么空旷会让人既舒服又不安？用 Bang 的原则来读：浅色背景让人感到安全；长长的水平线让人平静；画面中心是空的，于是眼睛开始搜寻。然后语境完成剩下的部分：你知道这些房间里做过什么。洁净开始被读作道德上的"无菌"：一个干净到不可能有人性生活过的地方。</span></p>
+        <p><span lang="en">Beyond Light is also where Guardians first wield the Darkness, as <strong>Stasis</strong>: an ice-blue, crystalline power. Crystals are geometry that grows. Fittingly, it is the first hint that the Darkness is about order, about stopping things in place.</span><span lang="zh">《凡人之外》也是守护者第一次使用黑暗之力，也就是<strong>冰影（Stasis）</strong>：一种冰蓝色、结晶状的力量。晶体是"会生长的几何"。这恰好是第一个暗示：黑暗关乎秩序，关乎让一切停止在原地。</span></p>
+        <p class="aside"><span lang="en">An engineer's note: this is the same lesson industrial designers use on medical and lab equipment. White, rounded casings and wide margins signal "safe and controlled." Destiny keeps the visual language of safety and removes the safety itself.</span><span lang="zh">工程师视角的一点补充：这和工业设计师在医疗、实验设备上用的是同一套语言。白色、圆角外壳、留白，传达"安全、受控"。《命运》保留了安全的视觉语言，却抽走了安全本身。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 06 PILLARS ============ -->
+<section id="pillars" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">06 · <span lang="en">How Bungie describes its own art</span><span lang="zh">Bungie 如何描述自己的美术</span></p>
+    <h2><span lang="en">Mythic science fiction</span><span lang="zh">神话科幻</span></h2>
+    <div class="narrow">
+      <p><span lang="en">At GDC 2013, before the first Destiny shipped, writer Joe Staten and art director Christopher Barrett described the project as <strong>"mythic science fiction"</strong>: ancient, fantasy-style history fused with space opera.<span class="cite"><a href="#src-1">[1]</a></span> Almost everything visual in Destiny 2 still follows the principles from that talk.</span><span lang="zh">在 2013 年的 GDC 上，初代《命运》发售之前，编剧 Joe Staten 与美术总监 Christopher Barrett 把这个项目描述为<strong>"神话科幻"</strong>：古老的、奇幻式的历史与太空歌剧融为一体。<span class="cite"><a href="#src-1">[1]</a></span>《命运2》几乎所有的视觉表达，仍然遵循那次演讲里的原则。</span></p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><rect x="6" y="14" width="44" height="30" fill="none" stroke="#e8c77a"/><circle cx="38" cy="24" r="5" fill="#e8c77a"/><path d="M6 44 L20 30 L30 38 L38 32 L50 44" fill="none" stroke="#e8c77a"/></svg>
+        <h3><span lang="en">Postcards</span><span lang="zh">明信片</span></h3>
+        <p><span lang="en">Early concept paintings were called "postcards": single images that fix the mood, palette and fiction of a place before any level exists, guided by the question "What's the center of your world?"<span class="cite"><a href="#src-1">[1]</a></span></span><span lang="zh">早期概念画被称为"明信片"：在关卡出现之前，用一张图确定一个地方的情绪、色彩与设定，并以一个问题为指引："你的世界的中心是什么？"<span class="cite"><a href="#src-1">[1]</a></span></span></p>
+      </div>
+      <div class="pillar">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M10 46 V20 L18 14 V46 M26 46 V10 H34 V46 M42 46 V24 L48 30 V46" fill="none" stroke="#e8c77a"/><path d="M8 46 C18 36 24 40 30 32 S44 30 50 22" fill="none" stroke="#3ee08f"/></svg>
+        <h3><span lang="en">Hopeful ruins</span><span lang="zh">充满希望的废墟</span></h3>
+        <p><span lang="en">Environments start from photos of real decay, then add one fantastic element. The goal, in environment artist Jason Sussman's words, is a "hopeful, inspiring direction": life still thriving after humanity's fall.<span class="cite"><a href="#src-2">[2]</a></span></span><span lang="zh">环境从真实的衰败照片出发，再加入一个奇幻元素。用环境美术 Jason Sussman 的话说，目标是一种"充满希望、令人振奋的方向"：人类陨落之后，生命依然繁盛。<span class="cite"><a href="#src-2">[2]</a></span></span></p>
+      </div>
+      <div class="pillar">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="18" fill="none" stroke="#e8c77a"/><path d="M28 10 C20 22 36 34 28 46" fill="none" stroke="#b36cff"/><circle cx="28" cy="28" r="3" fill="#e8c77a"/></svg>
+        <h3><span lang="en">The familiar made strange</span><span lang="zh">熟悉之物变陌生</span></h3>
+        <p><span lang="en">Mystery comes from where the expected meets the strange: the Moon you know, with a Hive fortress grown into it.<span class="cite"><a href="#src-1">[1]</a></span> The Pale Heart does this to Destiny's own history.</span><span lang="zh">神秘感来自"预期"与"怪异"相遇之处：你熟悉的月球，却长出了一座邪魔堡垒。<span class="cite"><a href="#src-1">[1]</a></span>苍白之心则把这一手法用在了《命运》自己的历史上。</span></p>
+      </div>
+      <div class="pillar">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><rect x="8" y="8" width="40" height="40" fill="none" stroke="#e8c77a"/><path d="M8 34 H48 M20 8 V48" stroke="#f08a24"/><circle cx="34" cy="22" r="7" fill="none" stroke="#7fd6ff"/></svg>
+        <h3><span lang="en">70s–80s sci-fi</span><span lang="zh">七八十年代科幻</span></h3>
+        <p><span lang="en">Influences named by the team include John Harris's illustrations, Beksiński, Tarkovsky and Terry Gilliam.<span class="cite"><a href="#src-1">[1]</a></span> Concept artist Dima Goryainov says Destiny "has always had this relationship with 70s and 80s sci-fi," which was more colorful and didn't take itself so seriously.<span class="cite"><a href="#src-3">[3]</a></span></span><span lang="zh">团队提到的影响包括 John Harris 的插画、贝克辛斯基、塔可夫斯基与特瑞·吉列姆。<span class="cite"><a href="#src-1">[1]</a></span>概念美术 Dima Goryainov 说《命运》"一直与七八十年代的科幻有着联系"，那个年代的科幻更多彩，也没那么一本正经。<span class="cite"><a href="#src-3">[3]</a></span></span></p>
+      </div>
+      <div class="pillar">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 6 L48 46 H8 Z" fill="none" stroke="#e8c77a"/><circle cx="28" cy="32" r="6" fill="none" stroke="#e8c77a"/></svg>
+        <h3><span lang="en">Readable at a glance</span><span lang="zh">一眼可读</span></h3>
+        <p><span lang="en">It is a shooter first. Enemy silhouettes, colors and armor plates are tuned so you know what a thing is, and where to shoot it, in a split second. 3D character lead Eric Elton: "Gameplay is super important."<span class="cite"><a href="#src-4">[4]</a></span></span><span lang="zh">它首先是一款射击游戏。敌人的剪影、颜色和护甲都经过调整，让你在一瞬间知道它是什么、该往哪里打。3D 角色主管 Eric Elton 说："玩法极其重要。"<span class="cite"><a href="#src-4">[4]</a></span></span></p>
+      </div>
+      <div class="pillar">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M8 40 Q28 4 48 40" fill="none" stroke="#e8c77a"/><path d="M14 40 H42" stroke="#e8c77a"/><circle cx="28" cy="24" r="2" fill="#e8c77a"/></svg>
+        <h3><span lang="en">Space as narrative</span><span lang="zh">以空间叙事</span></h3>
+        <p><span lang="en">World art lead Rusty Durbin calls balancing composition with navigation "one of the more poetic challenges": the team wants to "really tell a lot of narrative" through environments alone.<span class="cite"><a href="#src-4">[4]</a></span></span><span lang="zh">世界美术主管 Rusty Durbin 把"在构图与玩家导航之间取得平衡"称为"更具诗意的挑战之一"：团队希望仅通过环境就能"讲述大量叙事"。<span class="cite"><a href="#src-4">[4]</a></span></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 07 EXPANSIONS ============ -->
+<section id="expansions" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">07 · <span lang="en">Every expansion, 2017–2025</span><span lang="zh">全部资料片，2017–2025</span></p>
+    <h2><span lang="en">Each expansion is a visual thesis</span><span lang="zh">每一部资料片都是一个视觉命题</span></h2>
+    <div class="narrow">
+      <p><span lang="en">Choose an expansion. Each one gets its own palette, a governing visual idea, the story beat, and a note on what to look at. Use ← → to step through when presenting.</span><span lang="zh">选择一部资料片。每一部都有自己的配色、核心视觉理念、故事要点，以及"该看什么"的提示。演示时可以用 ← → 键切换。</span></p>
+    </div>
+    <div class="xp">
+      <div class="xp-rail" role="tablist" aria-label="Expansions" id="xpRail"></div>
+      <div class="xp-card" id="xpCard" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 08 FACTIONS ============ -->
+<section id="factions" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">08 · <span lang="en">Shape language</span><span lang="zh">形状语言</span></p>
+    <h2><span lang="en">Every faction is a geometry</span><span lang="zh">每个种族都是一种几何</span></h2>
+    <div class="narrow">
+      <p><span lang="en">Destiny's enemies are designed so that you could identify each one from a silhouette in a snowstorm. The glyphs below are original abstractions, not game art: they show the underlying shape idea of each faction.</span><span lang="zh">《命运》的敌人设计到你在暴风雪里只看剪影也能认出是谁。下面的图形是原创的抽象图示，并非游戏美术：它们表达的是每个种族背后的形状理念。</span></p>
+    </div>
+    <div class="explorer">
+      <div class="tabs" role="tablist" aria-label="Factions" id="facTabs"></div>
+      <div id="facPanels"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 09 PARACAUSAL PALETTE ============ -->
+<section id="elements" data-slide>
+  <div class="wrap reveal">
+    <p class="eyebrow">09 · <span lang="en">Color as metaphysics</span><span lang="zh">作为形而上学的颜色</span></p>
+    <h2><span lang="en">The paracausal palette</span><span lang="zh">超因果的调色盘</span></h2>
+    <div class="narrow">
+      <p><span lang="en">Guardian powers are color-coded, and each color is also a philosophy. Bang notes that we group things by color far more strongly than by shape; Destiny leans on that, so a single hue tells you what a power does and what it means. Select one.</span><span lang="zh">守护者的能力以颜色区分，而每种颜色也代表一种哲学。Bang 指出，我们按颜色归类事物的倾向远强于按形状；《命运》正是利用了这一点：一个色相就能告诉你某种能力的作用与含义。点选一个看看。</span></p>
+    </div>
+    <div class="elements" id="elGrid"></div>
+    <div class="el-detail" id="elDetail"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 10 LORE ============ -->
+<section id="lore" data-slide>
+  <div class="wrap reveal narrow">
+    <p class="eyebrow">10 · <span lang="en">The story, in one scroll</span><span lang="zh">一页读完的故事</span></p>
+    <h2><span lang="en">From the Golden Age to the Final Shape</span><span lang="zh">从黄金时代到终焉之形</span></h2>
+    <p><span lang="en">Open each era. The colored note under each one says how that idea shows up in the art.</span><span lang="zh">展开每个时代。下面的彩色注释说明这个时代的思想如何体现在美术上。</span></p>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ 11 DISCUSS ============ -->
+<section id="talk" data-slide>
+  <div class="wrap reveal narrow">
+    <p class="eyebrow">11 · <span lang="en">For the conversation</span><span lang="zh">带去交流的问题</span></p>
+    <h2><span lang="en">Questions worth asking an illustrator</span><span lang="zh">值得问一位插画家的问题</span></h2>
+    <div class="questions">
+      <div class="q"><p><span lang="en">Bang's principles describe single pictures. In a game the player moves the frame. Which of her principles survive when the viewer controls the camera, and which break?</span><span lang="zh">Bang 的原则针对的是单张图画。而在游戏里，是玩家在移动画框。当观者控制镜头时，哪些原则仍然成立，哪些会失效？</span></p></div>
+      <div class="q"><p><span lang="en">The Witness is the most abstract villain in the series: a silhouette with a hole cut in it. Is abstraction more frightening than a detailed monster? Why?</span><span lang="zh">见证者是整个系列最抽象的反派：一个被挖了洞的剪影。抽象是否比细节丰富的怪物更可怕？为什么？</span></p></div>
+      <div class="q"><p><span lang="en">The Pale Heart rebuilds familiar places from earlier games as memories. How does an illustrator make a place read as "remembered" rather than "real"?</span><span lang="zh">苍白之心把早期游戏里熟悉的地点作为"记忆"重建。插画家如何让一个地方读起来像"被记住的"而不是"真实的"？</span></p></div>
+      <div class="q"><p><span lang="en">Neomuna (Lightfall) was criticized by many players for feeling off-tone, too bright and clean for Destiny. Is that a failure of design or of context?</span><span lang="zh">《光陨之秋》的新蒙纳被许多玩家批评"调性不对"，对《命运》来说太亮、太干净。这是设计的失败，还是语境的失败？</span></p></div>
+      <div class="q"><p><span lang="en">Savathûn's design pairs moth wings with a crown and a soft, almost elegant silhouette, against Oryx's aggressive bat wings. How much of a character can a silhouette carry?</span><span lang="zh">萨瓦图恩的设计用蛾翼、王冠和柔和而近乎优雅的剪影，与欧瑞克斯咄咄逼人的蝙蝠翼形成对比。一个剪影能承载多少角色性格？</span></p></div>
+      <div class="q"><p><span lang="en">For someone who designs robots: if meaning comes from context, can a machine's casing or the lettering beside a switch be designed to make people feel trust, care or wariness?</span><span lang="zh">对于一个做机器人的人来说：如果意义来自语境，那么机器的外壳、开关旁的字样，是否可以被设计成让人感到信任、关怀或警惕？</span></p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ GLOSSARY ============ -->
+<section id="glossary">
+  <div class="wrap reveal">
+    <p class="eyebrow"><span lang="en">Glossary</span><span lang="zh">术语表</span></p>
+    <h2><span lang="en">Names you will hear</span><span lang="zh">你会听到的名字</span></h2>
+    <div class="gloss" id="gloss"></div>
+  </div>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section id="sources" class="sources">
+  <div class="wrap narrow">
+    <p class="eyebrow"><span lang="en">Sources &amp; further reading</span><span lang="zh">资料来源与延伸阅读</span></p>
+    <h2><span lang="en">Where this comes from</span><span lang="zh">资料出处</span></h2>
+    <ol>
+      <li id="src-1">80.lv, "World Building and Art Direction of Destiny" (2015), a write-up of the GDC 2013 talk by Joe Staten &amp; Christopher Barrett. <a href="https://80.lv/articles/world-building-and-art-direction-of-destiny/" target="_blank" rel="noopener">80.lv</a></li>
+      <li id="src-2">Christian Nutt, "Forging a new reality: Bungie on Destiny's art direction," interview with Jason Sussman, Game Developer (2014). <a href="https://gamedeveloper.com/production/forging-a-new-reality-bungie-on-i-destiny-i-s-art-direction" target="_blank" rel="noopener">gamedeveloper.com</a></li>
+      <li id="src-3">Steve Wright, "Bungie's Savathûn design: eeriness and elegance put together," interview with Dima Goryainov, Stevivor (2022). <a href="https://stevivor.com/features/interviews/bungies-savathun-design-eeriness-and-elegance-put-together" target="_blank" rel="noopener">stevivor.com</a></li>
+      <li id="src-4">Jess Kinghorn, "Destiny 2: The Final Shape: game art 10 years in the making," Creative Bloq (2024). <a href="https://www.creativebloq.com/entertainment/games/the-art-of-destiny-2-the-final-shape" target="_blank" rel="noopener">creativebloq.com</a></li>
+      <li id="src-5">ArtStation Magazine, Bungie art blasts: <a href="https://magazine.artstation.com/2022/03/bungie-destiny-2-the-witch-queen-art-blast/" target="_blank" rel="noopener">The Witch Queen</a>, <a href="https://magazine.artstation.com/2023/03/bungie-destiny-2-lightfall-art-blast/" target="_blank" rel="noopener">Lightfall</a>, <a href="https://magazine.artstation.com/2024/06/bungie-destiny-2-the-final-shape/" target="_blank" rel="noopener">The Final Shape</a>, and <a href="https://magazine.artstation.com/2022/10/a-day-on-the-destiny-2-concept-team/" target="_blank" rel="noopener">A Day on the Destiny 2 Concept Team</a>.</li>
+      <li id="src-6">Cook &amp; Becker, "The Art of Destiny 2." <a href="https://www.cookandbecker.com/en/article/133/the-art-of-destiny-2.html" target="_blank" rel="noopener">cookandbecker.com</a></li>
+      <li id="src-7">80.lv, "Environment Design of Destiny 2." <a href="https://80.lv/articles/environment-design-of-destiny-2/" target="_blank" rel="noopener">80.lv</a></li>
+      <li id="src-8">Natalya Tatarchuk et al., "Destiny: From Mythic Science Fiction to Rendering in Real-Time," SIGGRAPH 2013 Advances in Real-Time Rendering. <a href="https://advances.realtimerendering.com/s2013/Tatarchuk-Destiny-SIGGRAPH2013.pdf" target="_blank" rel="noopener">PDF</a> · and the GDC 2017 <a href="https://advances.realtimerendering.com/destiny/gdc_2017/index.html" target="_blank" rel="noopener">Destiny Shader Pipeline</a> talk.</li>
+      <li id="src-9">GDC Vault, "Building Customizable Characters for Bungie's Destiny." <a href="https://gdcvault.com/play/1020412/Building-Customizable-Characters-for-Bungie" target="_blank" rel="noopener">gdcvault.com</a></li>
+      <li id="src-10">Game Informer, "How Bungie Built the World of Destiny" (2013). <a href="https://gameinformer.com/b/news/archive/2013/03/28/how-bungie-built-the-world-of-destiny.aspx" target="_blank" rel="noopener">gameinformer.com</a></li>
+      <li id="src-11">Destinypedia, community lore wiki: <a href="https://www.destinypedia.com/Traveler" target="_blank" rel="noopener">The Traveler</a>, <a href="https://www.destinypedia.com/Pale_Heart" target="_blank" rel="noopener">The Pale Heart</a>, <a href="https://destinypedia.com/Hive" target="_blank" rel="noopener">The Hive</a>.</li>
+      <li id="src-12">Molly Bang, <i>Picture This: How Pictures Work</i> (SeaStar Books, 1991; revised edition, Chronicle Books, 2016).</li>
+      <li id="src-13"><span lang="en">Primary sources to explore in the game itself: the lore books <i>Books of Sorrow</i> (Hive origins), <i>Unveiling</i> (the Gardener and the Winnower, Shadowkeep), and <i>Lucent Moth</i> (The Witch Queen); and Bungie's ViDocs released before each expansion on Bungie's official YouTube channel.</span><span lang="zh">游戏内可以继续探索的一手资料：传说书《哀伤之书》（邪魔起源）、《揭示》（园丁与筛选者，暗影要塞）、《光蛾》（邪姬魅影）；以及 Bungie 在每部资料片发售前于官方 YouTube 频道发布的 ViDoc 开发纪录片。</span></li>
+    </ol>
+    <p class="disclaimer"><span lang="en">A fan study made for learning and discussion. Destiny and Destiny 2 are trademarks of Bungie, Inc. All illustrations on this page are original CSS/SVG abstractions; no game artwork is reproduced. Follow the links above to see Bungie's actual concept art. Quotes are short excerpts from the cited articles; lore summaries are paraphrased.</span><span lang="zh">这是一份用于学习与讨论的粉丝研究。Destiny 与 Destiny 2 是 Bungie, Inc. 的商标。本页所有插图均为原创 CSS/SVG 抽象图形，未复制任何游戏美术。想看 Bungie 真正的概念画，请点击上面的链接。引文为所引文章中的简短摘录；世界观内容为转述。</span></p>
+  </div>
+</section>
+
+<footer class="site"><span lang="en">Light &amp; Shape · made for a conversation about art</span><span lang="zh">光与形 · 为一次关于艺术的交流而作</span></footer>
+
+<div class="hint" id="hint"><span lang="en">← → to move between sections · Esc to exit</span><span lang="zh">← → 切换章节 · Esc 退出</span></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
