@@ -528,5 +528,5 @@ html[data-lang="zh"] .flavor { font-family: "Noto Serif SC", serif; font-style: 
 .act-arms button { all: unset; cursor: zoom-in; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; border: 1px solid var(--panel-line); border-radius: 999px; font-size: 13px; color: var(--ink); background: var(--panel); }
 .act-arms button:hover { border-color: var(--c); }
 .act-arms button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.act-arms img { width: 54px; height: 30px; object-fit: cover; border-radius: 999px; background: #1a1c22; }
+.act-arms img { width: 58px; height: 32px; object-fit: contain; border-radius: 999px; background: radial-gradient(ellipse, #3a3e48, #15171c); }
 @media (max-width: 600px) { .act { grid-template-columns: 1fr; gap: 10px; } .saga::before { display: none; } .act-num { width: 42px; height: 42px; } .s2s { grid-template-columns: 1fr; } .foundries { grid-template-columns: 1fr; } }
