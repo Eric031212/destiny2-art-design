@@ -243,10 +243,11 @@
   /* ================= gallery (real concept art) ================= */
   var LB = { list: [], i: 0 };
   function artistLink(a) {
+    if (!a.handle) return L("Official in-game image · Bungie", "官方游戏内图片 · Bungie") + (a.type ? " · " + esc(a.type[lang]) : "");
     var role = (window.ROLES && ROLES[a.handle]) || "";
     return '<a href="https://www.artstation.com/' + a.handle + '" target="_blank" rel="noopener">' + esc(a.artist) + "</a>" + (role && role !== "Bungie" ? ' <span class="role">· ' + esc(role) + "</span>" : "");
   }
-  function chapterOf(a) { return ART.filter(function (c) { return c.id === a.chapter; })[0]; }
+  function chapterOf(a) { return ART.concat(window.XCH || []).filter(function (c) { return c.id === a.chapter; })[0] || { name: { en: "", zh: "" }, year: "", blast: "#" }; }
   function L(en, zh) { return lang === "zh" ? zh : en; }
 
   function openLB(list, i) {
@@ -259,8 +260,8 @@
     var a = ART_INDEX[LB.list[LB.i]], c = chapterOf(a);
     var img = $("#lbImg"); img.src = a.img; img.alt = a.title.en + " by " + a.artist;
     $("#lbCap").innerHTML = '<p class="lb-meta">' + esc(c.name[lang]) + " · " + c.year + " · " + a.id + " · " + (LB.i + 1) + " / " + LB.list.length + "</p><h3>" + esc(a.title[lang]) + '</h3><p class="by">' + artistLink(a) + "</p>" +
-      "<h4>" + L("How it is designed", "设计手法") + "</h4><p>" + esc(a.how[lang]) + "</p><h4>" + L("How it echoes the story", "与故事的呼应") + "</h4><p>" + esc(a.story[lang]) + "</p>" +
-      '<p class="src"><a href="' + a.img + '" target="_blank" rel="noopener">' + L("Open image", "打开图片") + '</a> · <a href="https://www.artstation.com/' + a.handle + '" target="_blank" rel="noopener">ArtStation</a> · <a href="' + c.blast + '" target="_blank" rel="noopener">' + L("Art blast", "作品专题") + "</a></p>";
+      (a.flavor ? '<blockquote class="flavor">' + esc(a.flavor[lang]) + "</blockquote>" : "") + "<h4>" + L("How it is designed", "设计手法") + "</h4><p>" + esc(a.how[lang]) + "</p><h4>" + L("How it echoes the story", "与故事的呼应") + "</h4><p>" + esc(a.story[lang]) + "</p>" +
+      '<p class="src"><a href="' + a.img + '" target="_blank" rel="noopener">' + L("Open image", "打开图片") + "</a>" + (a.handle ? ' · <a href="https://www.artstation.com/' + a.handle + '" target="_blank" rel="noopener">ArtStation</a> · <a href="' + c.blast + '" target="_blank" rel="noopener">' + L("Art blast", "作品专题") + "</a>" : ' · <a href="https://www.bungie.net/7/en/Destiny" target="_blank" rel="noopener">Bungie.net</a>') + "</p>";
   }
   (function lbWire() {
     var lb = $("#lb"); if (!lb) return;
@@ -466,6 +467,107 @@
       else if (d.exitFullscreen) d.exitFullscreen().catch(function () {});
       hint.classList.add("show"); setTimeout(function () { hint.classList.remove("show"); }, 3500);
     });
+  })();
+
+  /* ================= shared: thumbnails that open the viewer ================= */
+  function thumbs(ids, cls) {
+    return '<div class="' + (cls || "thumbs") + '" data-ids="' + ids.join(",") + '">' + ids.map(function (id, i) {
+      var a = ART_INDEX[id]; if (!a) return "";
+      return '<figure><button type="button" data-open="' + i + '" aria-label="' + esc(a.title.en) + '"><img loading="lazy" src="' + a.img + '" alt="' + esc(a.title.en) + " by " + esc(a.artist) + '"></button><figcaption><b>' + esc(a.title[lang]) + "</b>" + esc(a.artist) + "</figcaption></figure>";
+    }).join("") + "</div>";
+  }
+  function wireThumbs(container) {
+    container.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-open]"), box = b && b.closest("[data-ids]");
+      if (b && box) openLB(box.dataset.ids.split(","), +b.dataset.open);
+    });
+  }
+  function scroller(wrap, grid) {
+    var prev = $(".gs-prev", wrap), next = $(".gs-next", wrap);
+    function upd() { var max = grid.scrollWidth - grid.clientWidth; prev.disabled = grid.scrollLeft < 4; next.disabled = grid.scrollLeft > max - 4; }
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-gs]"); if (!b) return;
+      var col = grid.firstElementChild; var w = col ? col.getBoundingClientRect().width + 20 : 320;
+      grid.scrollBy({ left: +b.dataset.gs * Math.max(w, Math.floor(grid.clientWidth / w) * w), behavior: reduce ? "auto" : "smooth" });
+    });
+    grid.addEventListener("scroll", upd, { passive: true }); window.addEventListener("resize", upd);
+    var drag = null, moved = false;
+    grid.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse" || e.button !== 0) return; drag = { x: e.clientX, l: grid.scrollLeft }; moved = false; });
+    window.addEventListener("pointermove", function (e) { if (!drag) return; var dx = e.clientX - drag.x; if (!moved && Math.abs(dx) > 6) { moved = true; grid.classList.add("dragging"); } if (moved) grid.scrollLeft = drag.l - dx; });
+    window.addEventListener("pointerup", function () { if (drag) { drag = null; grid.classList.remove("dragging"); } });
+    grid.addEventListener("click", function (e) { if (moved) { moved = false; e.preventDefault(); e.stopPropagation(); } }, true);
+    return upd;
+  }
+
+  /* ================= atlas ================= */
+  (function atlas() {
+    var tabs = $("#atlasTabs"), panel = $("#atlasPanel"); if (!tabs || !window.ATLAS) return;
+    var cur = 0;
+    function draw() {
+      tabs.innerHTML = ATLAS.map(function (c, i) { return '<button role="tab" type="button" aria-selected="' + (i === cur) + '" data-i="' + i + '" style="--c:' + c.c + '">' + esc(c.name[lang]) + "</button>"; }).join("");
+      var c = ATLAS[cur];
+      panel.style.setProperty("--c", c.c);
+      panel.innerHTML = '<div class="atlas-text"><h3>' + esc(c.name[lang]) + '</h3><dl><dt>' + L("Shape", "形状") + "</dt><dd>" + esc(c.shape[lang]) + "</dd><dt>" + L("Light", "光") + "</dt><dd>" + esc(c.light[lang]) + "</dd></dl><p>" + esc(c.read[lang]) + "</p></div>" + thumbs(c.ids, "thumbs atlas-thumbs");
+    }
+    tabs.addEventListener("click", function (e) { var b = e.target.closest("[data-i]"); if (b) { cur = +b.dataset.i; draw(); } });
+    wireThumbs(panel);
+    renderers.push(draw);
+  })();
+
+  /* ================= arsenal ================= */
+  (function arsenal() {
+    if (!window.ARMS) return;
+    var A = ARMS, fEl = $("#foundries"), chips = $("#famChips"), grid = $("#armsGrid"), intro = $("#famIntro"), s2s = $("#s2s");
+    var fam = "all", upd = scroller($(".arms-scroller"), grid);
+    function dmg(d) { var x = A.DMG[d] || A.DMG[1]; return '<span class="dmg" style="--d:' + x.c + '">' + x[lang] + "</span>"; }
+    function list() { return A.EXOTICS.filter(function (w) { return fam === "all" || w.fam === fam; }); }
+    function draw() {
+      fEl.innerHTML = A.FOUNDRIES.map(function (f) {
+        return '<article class="foundry" style="--c:' + f.c + '"><header><h4>' + esc(f.name[lang]) + '</h4><p class="motto">' + esc(f.motto[lang]) + '</p></header><div class="f-guns">' +
+          f.w.map(function (w) { return '<figure><img loading="lazy" src="' + A.SHOT + w.s + '" alt="' + esc(w.n) + '"><figcaption>' + esc(lang === "zh" ? w.zh : w.n) + " · " + esc(w.t[lang]) + "</figcaption></figure>"; }).join("") +
+          "</div><p>" + esc(f.read[lang]) + "</p></article>";
+      }).join("");
+      chips.innerHTML = '<button type="button" role="tab" data-f="all" aria-selected="' + (fam === "all") + '">' + L("All", "全部") + " · " + A.EXOTICS.length + "</button>" +
+        A.FAMILIES.map(function (f) { var n = A.EXOTICS.filter(function (w) { return w.fam === f.id; }).length; return '<button type="button" role="tab" data-f="' + f.id + '" aria-selected="' + (fam === f.id) + '" style="--c:' + f.c + '">' + esc(f.name[lang]) + " · " + n + "</button>"; }).join("");
+      var F = A.FAMILIES.filter(function (f) { return f.id === fam; })[0];
+      intro.textContent = F ? F.intro[lang] : L("Forty-three exotic weapons in nine families. Each family shares a material and a culture, the same way buildings do.", "九个家族，四十三把异域武器。每个家族共享一种材质与一种文化，就像建筑一样。");
+      var ws = list();
+      grid.innerHTML = ws.map(function (w, i) {
+        var F = A.FAMILIES.filter(function (f) { return f.id === w.fam; })[0];
+        return '<article class="art-card arm-card" style="--c:' + F.c + '"><button type="button" class="art-img arm-img" data-open="' + i + '" aria-label="' + esc(w.n) + '"><img loading="lazy" draggable="false" src="' + A.SHOT + w.s + '" alt="' + esc(w.n) + '"><span class="art-id">' + esc(F.name[lang]) + "</span></button>" +
+          '<div class="art-body"><h3>' + esc(lang === "zh" ? w.zh : w.n) + '</h3><p class="by">' + esc(lang === "zh" ? w.n : w.zh) + " · " + esc(w.t[lang]) + " " + dmg(w.d) + '</p><blockquote class="flavor">' + esc(w.flavor[lang]) + "</blockquote>" +
+          '<p class="clamp">' + esc(w.how[lang]) + '</p><button type="button" class="more" data-open="' + i + '">' + L("Read the full analysis →", "阅读完整解读 →") + "</button></div></article>";
+      }).join("");
+      grid.dataset.ids = ws.map(function (w) { return w.id; }).join(",");
+      grid.scrollLeft = 0; upd();
+      var pairs = [["UV28", "Euphony"], ["UV29", "Vexcalibur"], ["UV30", "Microcosm"], ["UV31", "Ergo Sum"], ["UV32", "Cloudstrike"]];
+      s2s.innerHTML = pairs.map(function (p) {
+        var a = ART_INDEX[p[0]], w = A.EXOTICS.filter(function (x) { return x.n === p[1]; })[0]; if (!a || !w) return "";
+        return '<div class="pair" data-ids="' + a.id + "," + w.id + '"><figure><button type="button" data-open="0"><img loading="lazy" src="' + a.img + '" alt="' + esc(a.title.en) + '"></button><figcaption><b>' + L("Concept", "概念") + "</b>" + esc(a.artist) + '</figcaption></figure><span class="arrow" aria-hidden="true">→</span><figure><button type="button" data-open="1"><img loading="lazy" src="' + A.SHOT + w.s + '" alt="' + esc(w.n) + '"></button><figcaption><b>' + L("In game", "游戏中") + "</b>" + esc(lang === "zh" ? w.zh : w.n) + "</figcaption></figure></div>";
+      }).join("");
+    }
+    chips.addEventListener("click", function (e) { var b = e.target.closest("[data-f]"); if (b) { fam = b.dataset.f; draw(); } });
+    grid.addEventListener("click", function (e) { var b = e.target.closest("[data-open]"); if (b) openLB(grid.dataset.ids.split(","), +b.dataset.open); });
+    wireThumbs(s2s);
+    renderers.push(draw);
+  })();
+
+  /* ================= saga ================= */
+  (function saga() {
+    var el = $("#saga"), nav = $("#sagaNav"); if (!el || !window.SAGA) return;
+    function weaponId(n) { var w = window.ARMS && ARMS.EXOTICS.filter(function (x) { return x.n === n; })[0]; return w && w.id; }
+    function draw() {
+      nav.innerHTML = SAGA.map(function (s, i) { return '<a href="#act-' + s.id + '" style="--c:' + s.c + '"><span>' + String(i + 1).padStart(2, "0") + "</span>" + esc(s.title[lang]) + "</a>"; }).join("");
+      el.innerHTML = SAGA.map(function (s, i) {
+        var wids = s.arms.map(weaponId).filter(Boolean);
+        var arms = wids.length ? '<div class="act-arms" data-ids="' + wids.join(",") + '"><span class="lbl">' + L("Weapons of this act", "这一幕的武器") + "</span>" + wids.map(function (id, j) {
+          var a = ART_INDEX[id]; return '<button type="button" data-open="' + j + '"><img loading="lazy" src="' + a.img + '" alt=""><span>' + esc(a.title[lang]) + "</span></button>";
+        }).join("") + "</div>" : "";
+        return '<article class="act" id="act-' + s.id + '" style="--c:' + s.c + '"><div class="act-num">' + String(i + 1).padStart(2, "0") + '</div><div class="act-body"><p class="act-era">' + esc(s.era[lang]) + "</p><h3>" + esc(s.title[lang]) + '</h3><p class="act-story">' + esc(s.story[lang]) + '</p><p class="act-design"><b>' + L("In the art", "美术上") + "</b>" + esc(s.design[lang]) + "</p>" + thumbs(s.art, "thumbs act-thumbs") + arms + "</div></article>";
+      }).join("");
+    }
+    wireThumbs(el);
+    renderers.push(draw);
   })();
 
   setLang(lang);

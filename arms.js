@@ -1,0 +1,281 @@
+/* Arsenal: weapon design appreciation.
+   Weapon names, types, flavor text and screenshots come from Bungie's official
+   Destiny 2 game database (bungie.net manifest, en + zh-chs). Images load from bungie.net. */
+(function () {
+  var SHOT = "https://www.bungie.net/common/destiny2_content/screenshots/";
+  var DMG = {
+    1: { en: "Kinetic", zh: "动能", c: "#d9d4c7" }, 2: { en: "Arc", zh: "电弧", c: "#7fd3ff" },
+    3: { en: "Solar", zh: "烈日", c: "#f2843a" }, 4: { en: "Void", zh: "虚空", c: "#b48cf0" },
+    6: { en: "Stasis", zh: "冰影", c: "#5b8ff0" }, 7: { en: "Strand", zh: "缚丝", c: "#4fd38c" }
+  };
+
+  /* ---------- foundries: weapon makers as design schools ---------- */
+  var FOUNDRIES = [
+    { id: "hakke", name: { en: "Häkke", zh: "Häkke" }, c: "#c9372c",
+      motto: { en: "Industrial, blunt, built to last", zh: "工业、直白、经久耐用" },
+      read: { en: "Häkke is the City's heavy industry. Slab sides, square muzzles, exposed bolts, matte black with one stripe of red and white like a warning label. Nothing curves unless it has to. In Bang's terms these are rectangles and horizontals: stable, dependable, a little cold. Häkke guns look like they were stamped out of a factory that never closes, because that is what a besieged city needs.",
+             zh: "Häkke 是最后的城市的重工业。平板般的枪身、方形枪口、外露的螺栓，哑光黑配一道红白色条纹，像一张警示标签。除非必须，否则没有任何曲线。用 Bang 的话说，这些是矩形与水平线：稳定、可靠、略带冷感。Häkke 的枪看起来像是从一座永不停工的工厂里冲压出来的，而这正是一座被围困的城市所需要的。" },
+      w: [{ n: "Antiope-D", zh: "安提俄珀-D", t: { en: "Submachine Gun", zh: "微型冲锋枪" }, s: "566976653.jpg" },
+          { n: "Veles-X", zh: "溪谷-X", t: { en: "Pulse Rifle", zh: "脉冲步枪" }, s: "438540299.jpg" }] },
+    { id: "omolon", name: { en: "Omolon", zh: "Omolon" }, c: "#5fb4ff",
+      motto: { en: "Liquid tech, clean white, glowing", zh: "液态科技、洁白、发光" },
+      read: { en: "Omolon is the consumer-electronics brand of the Destiny universe. Pearl-white shells, rounded edges, logos printed like on a phone, and glowing capsules of liquid ammunition you can see through the casing. Its flavor text often reads like ad copy. The curves are friendly, but the visible fluid tanks make every Omolon gun feel slightly experimental, as if the safety testing ended yesterday.",
+             zh: "Omolon 是命运宇宙里的“消费电子品牌”。珍珠白的外壳、圆润的边缘、像手机一样印上去的标志，以及透过外壳能看到的发光液态弹药舱。它的风味文字读起来常常像广告文案。曲线很友善，但看得见的液体舱让每一把 Omolon 都带着一点实验品的味道，仿佛安全测试昨天才结束。" },
+      w: [{ n: "Hung Jury SR4", zh: "绞刑判官SR4", t: { en: "Scout Rifle", zh: "斥候步枪" }, s: "772231794.jpg" },
+          { n: "Uzume RR4", zh: "天钿RR4", t: { en: "Sniper Rifle", zh: "狙击步枪" }, s: "42874240.jpg" }] },
+    { id: "suros", name: { en: "SUROS", zh: "SUROS" }, c: "#e0e0e0",
+      motto: { en: "Sleek, sporty, musical", zh: "流线、运动感、音乐性" },
+      read: { en: "SUROS designs like a sports-car studio. Long tapered bodies, white panels with racing stripes, and model names taken from music: Cantata, Glissando, Requiem, Cadenza. Where Häkke is a factory, SUROS is a showroom. The diagonal stripes give even a resting gun a sense of speed, which is Bang's diagonal-equals-motion principle printed straight onto the paint job.",
+             zh: "SUROS 的设计像一家跑车工作室。修长收窄的枪身、带赛车条纹的白色面板，型号取自音乐术语：大合唱（Cantata）、滑奏（Glissando）、安魂曲、华彩。如果说 Häkke 是工厂，SUROS 就是展厅。斜向的条纹让一把静止的枪也显得有速度感，这正是 Bang 的“斜线 = 运动”原则，被直接印在了涂装上。" },
+      w: [{ n: "Cantata-57", zh: "大合唱-57", t: { en: "Hand Cannon", zh: "手炮" }, s: "372697604.jpg" },
+          { n: "Glissando-47", zh: "滑奏-47", t: { en: "Scout Rifle", zh: "斥候步枪" }, s: "222606050.jpg" }] },
+    { id: "veist", name: { en: "Veist", zh: "Veist" }, c: "#3f7bff",
+      motto: { en: "Aggressive, angular, high-tech", zh: "激进、棱角、高科技" },
+      read: { en: "Veist is the City's cutting edge: angular receivers, deep blues, glowing seams and names that sound like weapons from a thriller (Black Scorpion, Arsenic Bite, Widow's Bite). Its shapes are triangles and points, so Bang would read them as alert and slightly dangerous. Veist sells the feeling of an advantage.",
+             zh: "Veist 是城市里的尖端科技：棱角分明的机匣、深蓝色调、发光的接缝，以及像惊悚片武器一样的名字（黑蝎、砷之噬、寡妇之噬）。它的形状是三角与尖角，Bang 会把它们读成警觉而略带危险。Veist 卖的是“优势”的感觉。" },
+      w: [{ n: "Fortunate Star", zh: "幸运星", t: { en: "Combat Bow", zh: "战斗弓箭" }, s: "591672323.jpg" },
+          { n: "Scintillation", zh: "闪耀", t: { en: "Linear Fusion Rifle", zh: "线性融合步枪" }, s: "1207321710.jpg" }] },
+    { id: "tex", name: { en: "Tex Mechanica", zh: "Tex Mechanica" }, c: "#d0a050",
+      motto: { en: "The frontier, rebuilt by hand", zh: "被亲手重造的边疆" },
+      read: { en: "Tex Mechanica builds the Destiny version of the Old West: revolvers, lever actions, brass, oiled wood, leather wraps and cloth tied to the barrel. It is the visual home of Destiny's gunslinger myth, the same myth as The Last Word and Thorn. Against Omolon's white plastic, Tex Mechanica says that some Guardians still want a weapon that looks like it has a past.",
+             zh: "Tex Mechanica 打造的是“命运版的旧西部”：左轮、杠杆枪机、黄铜、上油的木头、缠绕的皮革和系在枪管上的布条。它是《命运》枪手神话的视觉之家，和遗言、荆棘出自同一个神话。与 Omolon 的白色塑料相比，Tex Mechanica 在说：有些守护者仍然想要一把看起来“有过去”的武器。" },
+      w: [{ n: "Survivor's Epitaph", zh: "幸存者碑文", t: { en: "Hand Cannon", zh: "手炮" }, s: "2152350211.jpg" },
+          { n: "Long Arm", zh: "长臂", t: { en: "Scout Rifle", zh: "斥候步枪" }, s: "8293111.jpg" }] },
+    { id: "field", name: { en: "Field Forged", zh: "战铸" }, c: "#9a8f74",
+      motto: { en: "Salvage, repair, survival", zh: "拾荒、修补、求生" },
+      read: { en: "Field-forged weapons are not made in factories. They are rebuilt in the field from whatever survived: worn metal, tape, mismatched parts, scratched paint. They belong to the people outside the City walls, like Hawthorne and the Farm. Their imperfection is the point. In a series obsessed with perfect shapes, these guns carry the organic, patched-together side of the argument.",
+             zh: "战铸武器不是在工厂里造的，而是在野外用幸存下来的任何东西重新拼装出来的：磨损的金属、胶带、不配套的零件、刮花的漆。它们属于城墙之外的人，比如霍桑和农场。它们的不完美正是重点。在一个痴迷于完美形状的系列里，这些枪站在“有机、修修补补”的那一方。" },
+      w: [{ n: "Hawthorne's Field-Forged Shotgun", zh: "霍桑的战铸霰弹枪", t: { en: "Shotgun", zh: "霰弹枪" }, s: "731147177.jpg" },
+          { n: "Guiding Star", zh: "指路明星", t: { en: "Auto Rifle", zh: "自动步枪" }, s: "472847207.jpg" }] }
+  ];
+
+  /* ---------- exotic families ---------- */
+  var FAMILIES = [
+    { id: "human", c: "#e8c46a", name: { en: "Human craft", zh: "人类的工艺" },
+      intro: { en: "Weapons made by people: the City's factories, Golden Age engineering, a gun you found on day one. Their beauty is in function and in memory.", zh: "人造的武器：城市的工厂、黄金时代的工程、你第一天捡到的那把枪。它们的美在于功能，也在于记忆。" } },
+    { id: "gunslinger", c: "#d48a4c", name: { en: "The gunslinger myth", zh: "枪手神话" },
+      intro: { en: "Destiny's frontier legend: revolvers, duels, feathers and playing cards. The Hunter's world of outlaws and heroes.", zh: "《命运》的边疆传说：左轮、决斗、羽毛与扑克牌。属于猎人的亡命徒与英雄的世界。" } },
+    { id: "hive", c: "#9fbf6a", name: { en: "Hive bone", zh: "邪魔之骨" },
+      intro: { en: "Weapons grown rather than built. Bone, chitin, eyes and worms: the Hive's logic of the sword turned into objects you hold.", zh: "长出来而不是造出来的武器。骨、甲壳、眼睛和蠕虫：邪魔的“剑之逻辑”变成了你手中的物件。" } },
+    { id: "awoken", c: "#8fb8e8", name: { en: "Awoken & Ahamkara", zh: "觉醒者与阿罕卡拉" },
+      intro: { en: "Pale stone, cold blue light and wish-dragon bone. Elegant, secretive and always slightly cursed.", zh: "苍白的石头、冷蓝色的光与许愿龙之骨。优雅、隐秘，又总带着一点诅咒。" } },
+    { id: "machine", c: "#e05a4a", name: { en: "Machine minds", zh: "机器之心" },
+      intro: { en: "Rasputin, Clovis Bray and SIVA: Golden Age intelligence that outlived its makers.", zh: "拉斯普廷、克洛维斯·布瑞与 SIVA：比创造者活得更久的黄金时代智能。" } },
+    { id: "vex", c: "#c8a76a", name: { en: "Vex & time", zh: "Vex 与时间" },
+      intro: { en: "Bronze, milky fluid and impossible loops. Weapons that bend causality the way the Vex bend everything.", zh: "青铜、乳白色的液体与不可能的循环。像 Vex 弯折一切那样弯折因果的武器。" } },
+    { id: "cabal", c: "#c79a3a", name: { en: "Empire", zh: "帝国" },
+      intro: { en: "Cabal weapons: oversized, gilded, ceremonial. Made for hands far bigger than yours.", zh: "卡巴尔的武器：巨大、镀金、仪式化。为比你大得多的手而造。" } },
+    { id: "dark", c: "#b48cf0", name: { en: "Darkness & the Final Shape", zh: "暗影与终焉之形" },
+      intro: { en: "Pyramid chrome, liquid metal, impossible edges. The Witness's aesthetic of perfection, now in your hands.", zh: "金字塔的铬面、液态金属、不可能的边缘。见证者的“完美”美学，如今握在你手里。" } },
+    { id: "new", c: "#4fd38c", name: { en: "New Light", zh: "新的光" },
+      intro: { en: "Neomuna, the Pale Heart and beyond: weapons for the end of one saga and the start of the next.", zh: "内欧姆那、苍白之心以及更远处：为一个传奇的终结与下一个传奇的开端而造的武器。" } }
+  ];
+
+  function W(f, n, zh, t, tz, d, s, fe, fz, how, story) {
+    return { fam: f, n: n, zh: zh, t: { en: t, zh: tz }, d: d, s: s, flavor: { en: fe, zh: fz }, how: how, story: story };
+  }
+
+  var EXOTICS = [
+    /* human */
+    W("human", "Gjallarhorn", "加拉尔号角", "Rocket Launcher", "火箭发射器", 3, "1363886209.jpg",
+      "“If there is beauty in destruction, why not also in its delivery?” — Feizel Crux", "“如果说毁灭中蕴藏着美，那造成破坏的工具也理应如此。”——费泽尔·克鲁克斯",
+      { en: "A rocket launcher dressed as a ceremonial object: a gilded wolf's head at the muzzle, filigree along the tube, warm gold against gunmetal. The wolf turns a tube into a creature, and the gold says it was made to be admired as much as used.", zh: "一把被打扮成礼器的火箭筒：枪口是一颗镀金狼头，炮管布满金色花纹，暖金与枪灰形成对比。狼头把一根管子变成了一只生物，而黄金说明它既是用来用的，也是用来被欣赏的。" },
+      { en: "In the lore it was forged from the armor of Guardians who fell defending the City at the Twilight Gap. Its rockets split into a 'wolfpack', so the weapon fights the way a fireteam does. The flavor line says it outright: there is beauty in the delivery.", zh: "按照传说，它由在暮光隘口保卫城市时阵亡的守护者的盔甲锻造而成。它的火箭会分裂成“狼群”，所以这把武器的战斗方式就像一支火力战队。风味文字直接点明：毁灭的工具也可以是美的。" }),
+    W("human", "MIDA Multi-Tool", "米达多功能", "Scout Rifle", "斥候步枪", 1, "1331482397.jpg",
+      "Select application: Ballistic engagement. Entrenching tool. Avionics trawl. Troll smasher. Stellar sextant. List continues.", "选择应用：弹道交战。设防工具。航空电子拖网。巨人粉碎者。星球六分仪。列表未完。",
+      { en: "Compact, boxy, practical. It reads less like a weapon and more like a survey instrument with a stock, with a built-in radar on the side. No ornament at all: the design value is versatility.", zh: "紧凑、方正、实用。它看起来不像武器，更像一台装了枪托的勘测仪器，侧面还内置了雷达。完全没有装饰：设计价值在于“多用途”。" },
+      { en: "The flavor text is a menu of absurd uses, a joke about engineers who cannot stop adding features. It belongs to the scrappy, inventive side of humanity that survived the Collapse.", zh: "风味文字是一份荒诞用途的菜单，是在调侃停不下来加功能的工程师。它属于在大崩溃中幸存下来、足智多谋的那一面人类。" }),
+    W("human", "Sweet Business", "糖果生意", "Auto Rifle", "自动步枪", 1, "1345867570.jpg",
+      "“…I love my job.”", "“……我爱我的工作。”",
+      { en: "A rotary cannon carried by one person: drums, belts and exposed barrels, heavy machinery rather than a rifle. Its mass is the joke. It looks too big to hold, which makes the Guardian holding it look heroic.", zh: "一挺由一个人扛着的转管炮：弹鼓、弹链和外露的枪管，与其说是步枪，不如说是重型机械。它的体量就是笑点。它看起来大得拿不住，于是拿着它的守护者显得格外英勇。" },
+      { en: "One of the first exotics of the Red War, when the City had lost almost everything. The cheerful flavor line is the point: a little swagger in the darkest moment.", zh: "猩红战争最早的异域武器之一，那时城市几乎失去了一切。轻松的风味文字正是重点：在最黑暗的时刻保留一点潇洒。" }),
+    W("human", "Hard Light", "严苛光芒", "Auto Rifle", "自动步枪", 4, "4124984448.jpg",
+      "Ionized polymer synballistic attack platform. The system's lethality is dynamically robust across tactical spaces.", "离子化聚合物同步弹道攻击平台。该系统的致命性能动态应对所有战术空间。",
+      { en: "Omolon at its most commercial: smooth polymer body, bright neon accents, rounds that ricochet in coloured light. It looks like a product, not a relic.", zh: "最“商业化”的 Omolon：光滑的聚合物枪身、明亮的霓虹点缀、带着彩色光芒反弹的子弹。它看起来像一件产品，而不是一件遗物。" },
+      { en: "The flavor text parodies marketing jargon. Destiny's world has brands, catalogues and sales pitches, and that small detail makes the City feel like a real economy, not just a fortress.", zh: "风味文字在戏仿营销黑话。《命运》的世界有品牌、产品目录和推销话术，这个小细节让城市感觉像一个真实的经济体，而不只是一座堡垒。" }),
+    W("human", "Coldheart", "寒冰核心", "Trace Rifle", "追踪步枪", 2, "1345867571.jpg",
+      "The latest Omolon engineering leverages liquid fuel as coolant to keep weapon systems at biting subzero temperatures.", "最新的Omolon技术将液体燃料替换成了冷却液，以保持武器系统温度在零度以下。",
+      { en: "A white Omolon body with frosty coolant chambers. The continuous beam it fires turns the visual language of a lab instrument into a weapon.", zh: "白色的 Omolon 机身配上结霜的冷却舱。它发射的持续光束，把实验仪器的视觉语言变成了武器。" },
+      { en: "A trace rifle is the purest 'clean edge' in the arsenal: a perfectly straight line of light. Its sterile look echoes the labs of Beyond Light, safe-looking technology with something dangerous inside.", zh: "追踪步枪是整个武器库里最纯粹的“干净边缘”：一条笔直的光线。它无菌般的外观呼应了《凌光之刻》的实验室：看起来安全的科技，里面藏着危险。" }),
+    W("human", "Sunshot", "烈日弹丸", "Hand Cannon", "手炮", 3, "2907129557.jpg",
+      "“Can't outrun the sunrise.” —Liu Feng", "“步履再快，也快不过日出之势。”——刘枫",
+      { en: "A heavy revolver with glowing orange chambers, as if the sun were loaded into the cylinder. Its rounds explode and mark targets in solar light.", zh: "一把沉重的左轮，弹巢里透出橙色的光，仿佛把太阳装进了转轮。它的子弹会爆炸，并用烈日之光标记目标。" },
+      { en: "Colour does the storytelling: orange means Solar, and Solar means fire and renewal. You read the weapon's element before you read its stats, exactly Bang's point that we group things by colour first.", zh: "颜色在讲故事：橙色代表烈日，烈日代表火焰与重生。你先读出武器的元素，再读出它的属性，这正是 Bang 说的“我们首先按颜色归类”。" }),
+    W("human", "Khvostov 7G-0X", "赫沃斯托夫7G-0X", "Auto Rifle", "自动步枪", 1, "4129629253.jpg",
+      "“You don't know how long I've been looking for you.”", "“你不知道我找你找了多久。”",
+      { en: "Deliberately plain: a rugged, Kalashnikov-like silhouette with almost no exotic ornament. Its specialness is not in the shape at all.", zh: "刻意朴素：一个粗犷、类似卡拉什尼科夫的剪影，几乎没有异域武器的装饰。它的特别之处根本不在形状上。" },
+      { en: "A Khvostov was the first rifle a new Guardian picked up in the Cosmodrome in the original Destiny. Finding this one in the Pale Heart, a place made of memory, closes a ten-year loop. Meaning comes entirely from context: the same plain gun, now a keepsake.", zh: "在初代《命运》里，新生的守护者在宇宙港捡到的第一把步枪就是赫沃斯托夫。在由记忆构成的苍白之心里找到这一把，闭合了一个十年的循环。意义完全来自语境：同一把朴素的枪，如今成了纪念品。" }),
+
+    /* gunslinger */
+    W("gunslinger", "The Last Word", "遗言", "Hand Cannon", "手炮", 1, "1364093401.jpg",
+      "“Yours, until the last flame dies and all words have been spoken.” —Shin Malphur", "“在最后的火焰熄灭之前，它是你的了，该说的话也都说完了。”——骏·马尔福",
+      { en: "A worn, honest revolver: plain steel, a short barrel made for firing from the hip, no corruption, no glow. It is the frontier hero's gun in its simplest form.", zh: "一把磨旧而诚实的左轮：素钢、为腰射而设计的短枪管，没有腐化，也没有发光。它是边疆英雄之枪最简单的形态。" },
+      { en: "It belonged to Shin Malphur, the Guardian who hunted the outlaw Dredgen Yor and killed him with this gun. The Last Word and Thorn are a pair: the same kind of object, one clean and one corrupted, Light and its shadow told through two revolvers.", zh: "它属于骏·马尔福，那位追猎亡命徒德莱文·约尔、并用这把枪杀死他的守护者。遗言与荆棘是一对：同一种物件，一把干净，一把腐化，用两把左轮讲述光与它的阴影。" }),
+    W("gunslinger", "Thorn", "荆棘", "Hand Cannon", "手炮", 1, "3973202132.jpg",
+      "“To rend one's enemies is to see them not as equals, but objects—hollow of spirit and meaning.” —13th Understanding, 7th Book of Sorrow", "“撕裂敌人就意味着没有将他们平等对待，但是目标——是精神和意义的空洞。”——《忧愁七书》，第十三次释义",
+      { en: "The same revolver archetype, overgrown: barbed spikes, sickly green poison, organic thorns climbing the frame. Pointed shapes and acid green say danger before you fire it.", zh: "同样的左轮原型，却被“长满了”：倒刺、病态的绿色毒素、沿着枪身攀爬的有机荆棘。尖锐的形状和酸绿色在你开枪之前就在说“危险”。" },
+      { en: "Dredgen Yor's gun, the weapon that turned a Guardian into a murderer of Guardians. Its flavor text quotes the Hive's Books of Sorrow: corruption is shown as something growing over a familiar object.", zh: "德莱文·约尔的枪，让一位守护者变成守护者杀手的武器。它的风味文字引用了邪魔的《忧愁之书》：腐化被表现为在熟悉物件上“生长”出来的东西。" }),
+    W("gunslinger", "Ace of Spades", "黑桃A", "Hand Cannon", "手炮", 1, "347366834.jpg",
+      "“Folding was never an option.” —Cayde-6", "“盖牌认输永远不在选择之列。”——凯德6号",
+      { en: "A sleek dark revolver with a spade engraved on it and a gambler's flourish. It is personality turned into an object: playful, confident, a little reckless.", zh: "一把光滑的深色左轮，刻着黑桃图案，带着赌徒般的潇洒。它是被做成物件的性格：俏皮、自信、有点鲁莽。" },
+      { en: "Cayde-6's own gun. After his death in Forsaken, the player rebuilds it piece by piece. Holding it is an act of mourning, so the weapon carries more story than any cutscene.", zh: "凯德6号自己的枪。他在《遗落之族》中死去后，玩家一块一块地把它重新组装起来。握着它本身就是一种悼念，所以这把武器承载的故事比任何过场动画都多。" }),
+    W("gunslinger", "Hawkmoon", "隼月", "Hand Cannon", "手炮", 1, "3856705927.jpg",
+      "Stalk thy prey and let loose thy talons upon the Darkness.", "跟踪你的猎物，然后向暗影伸出你的利爪吧。",
+      { en: "A hunting revolver decorated with feathers and bird motifs. The ornament turns the gun into a bird of prey, an organic metaphor attached to a machine.", zh: "一把装饰着羽毛和鸟类图案的猎枪式左轮。装饰把枪变成了一只猛禽，是附着在机械上的有机隐喻。" },
+      { en: "A legend from the first Destiny that came back in Destiny 2. Its old-fashioned language ('thy talons') makes it sound like scripture, which suits a weapon that has become part of the Hunters' mythology.", zh: "来自初代《命运》、又在《命运2》回归的传奇武器。它古旧的措辞（“你的利爪”）读起来像经文，正适合一把已经成为猎人神话一部分的武器。" }),
+    W("gunslinger", "Still Hunt", "隐秘追猎", "Sniper Rifle", "狙击步枪", 3, "2905188646.jpg",
+      "There are too many ways to kill someone who needs killing.", "杀掉一个需要被杀的人，方法实在太多。",
+      { en: "A long hunting rifle in brass, wood and gunmetal, old-fashioned and handmade, like something hung over a cabin fireplace.", zh: "一把由黄铜、木头和枪灰色金属制成的长猎枪，古朴而手工感十足，像是挂在小木屋壁炉上方的东西。" },
+      { en: "From The Final Shape, where Cayde returns. It can fire a version of Cayde's Golden Gun, so his signature power survives inside an object. Its rustic look fits the cabin in the Pale Heart.", zh: "来自 Cayde 回归的《终焉之形》。它能射出凯德黄金枪的一个版本，于是他的标志性力量在一件物品里延续。它的乡野外观与苍白之心里的小木屋相配。" }),
+    W("gunslinger", "Red Death Reformed", "改造版猩红死命", "Pulse Rifle", "脉冲步枪", 3, "427899681.jpg",
+      "Vanguard policy still urges Guardians to destroy this weapon on sight.", "先锋政策依然敦促守护者一看到这种武器就将其摧毁。",
+      { en: "Blood red over black, with sharp lines. Its colour scheme is a warning sign, the opposite of the Vanguard's clean white and blue.", zh: "黑底上的血红色，配以锐利的线条。它的配色本身就是警告，与先锋队干净的白与蓝正好相反。" },
+      { en: "The original Red Death was associated with Guardians who killed other Guardians. The reformed version keeps that outlaw reputation. Again the gunslinger myth is about the line between hero and murderer.", zh: "原版的猩红死命与杀害其他守护者的守护者联系在一起，改造版保留了那种亡命徒的名声。枪手神话再一次关于英雄与杀手之间的那条线。" }),
+
+    /* hive */
+    W("hive", "Touch of Malice", "恶意触碰", "Scout Rifle", "斥候步枪", 1, "1802135586.jpg",
+      "“Let them feel every lash, every curse, every touch of malice that they first dealt to me.” —Eris Morn", "“让他们感受我最初从他们那受到的每一次鞭笞，每一次咒骂，每一次恶意之触。”——埃里斯·摩恩",
+      { en: "Bone, chitin and a staring green eye. It looks grown rather than manufactured, with the asymmetry of a living thing.", zh: "骨头、甲壳和一只凝视着的绿色眼睛。它看起来是“长出来”的而不是制造出来的，带着生物的不对称。" },
+      { en: "A weapon from Oryx's world that drains its wielder to keep firing. The Hive believe power must be paid for, and the gun makes the player pay in health. Design and lore say the same thing.", zh: "一把来自欧里克斯世界的武器，以消耗持有者的生命来持续开火。邪魔相信力量必须付出代价，而这把枪让玩家用生命来支付。设计与世界观说的是同一件事。" }),
+    W("hive", "Whisper of the Worm", "蠕虫低语", "Sniper Rifle", "狙击步枪", 3, "1891561814.jpg",
+      "A Guardian's power makes a rich feeding ground. Do not be revolted. There are parasites that may benefit the host… teeth sharper than your own.", "守护者的能量会使供养地更加丰盈。不要心生厌恶。那里的寄生物会让寄主……的牙齿比你的更锋利。",
+      { en: "A long, bony sniper rifle with a living worm inside it. The silhouette is a spine; the surface is shell and sinew.", zh: "一把细长、骨质的狙击步枪，里面住着一条活的蠕虫。它的剪影像一条脊椎，表面是甲壳与筋腱。" },
+      { en: "Hive power comes from worm symbiotes that demand to be fed. The flavor text tells you not to be revolted: the gun is a parasite, and so, the lore suggests, is power itself.", zh: "邪魔的力量来自需要被喂养的共生蠕虫。风味文字让你“不要心生厌恶”：这把枪就是一只寄生虫，而世界观暗示，力量本身也是。" }),
+    W("hive", "Necrochasm", "坏疽", "Auto Rifle", "自动步枪", 1, "1034055198.jpg",
+      "Is your Light bright enough to stand in full gaze of the Hive's abyss?", "你的光能是否足以承受邪魔族深渊的凝视？",
+      { en: "Black and bone, ribbed like a carcass, with a rifle's outline barely visible underneath. Dark values swallow detail, which makes it feel heavy and sinister.", zh: "黑色与骨色，像一具骨架般带着肋状结构，步枪的轮廓勉强可辨。暗色调吞没了细节，让它显得沉重而阴森。" },
+      { en: "Tied to Crota, Oryx's son, and his raid. The flavor line asks whether your Light can survive the abyss, the Hive's core image of a pit that looks back.", zh: "与欧里克斯之子克洛塔及其突袭相关。风味文字问你的光能否承受深渊，这是邪魔最核心的意象：一个会回望你的深渊。" }),
+    W("hive", "Osteo Striga", "枯骨鳞片", "Submachine Gun", "微型冲锋枪", 1, "46524085.jpg",
+      "“Victory is not in the unmaking of an enemy, but in the re-making of an enemy into your blade.” —9th Understanding, 7th Revision of Sorrow", "“胜利不是消灭敌人，而是将敌人重塑入你的利刃。”——《忧愁之书》第7次修订，第9次释义",
+      { en: "A compact weapon of pale bone and fleshy growth that fires poisonous, seeking rounds. It is the Witch Queen era's Hive look: more elegant and gilded than Oryx's, still unmistakably organic.", zh: "一把由苍白骨头与肉质增生构成的紧凑武器，发射带毒的追踪弹。这是《邪姬魅影》时代的邪魔风格：比欧里克斯时代更优雅、更带金饰，但依然毫无疑问是有机的。" },
+      { en: "From Savathûn's Lucent Brood, Hive who stole the Light. The flavor quote is the heart of Hive philosophy: you don't just destroy an enemy, you remake it into your weapon. The gun is that idea made literal.", zh: "来自萨瓦图恩的光明邪魔族，也就是窃取了光能的邪魔。风味文字是邪魔哲学的核心：不只是消灭敌人，而是把敌人重塑成你的武器。这把枪就是这个想法的字面化。" }),
+    W("hive", "Parasite", "寄生虫", "Grenade Launcher", "榴弹发射器", 3, "2812324400.jpg",
+      "“Constant projections. Unending destruction. The will of every efficient parasite.” —Savathûn's worm", "“不断施展奸计，造成无尽的破坏，便是每一只尽职的寄生虫的意志所在。”——萨瓦图恩的蠕虫",
+      { en: "A launcher built around a swollen sac and a worm that it fires. Its bulbous, wet forms are the opposite of every clean edge in the game.", zh: "一把围绕着一个膨胀的囊和它所发射的蠕虫而造的发射器。它鼓胀、湿润的形态与游戏中所有干净的边缘恰好相反。" },
+      { en: "It fires Savathûn's own worm, which grows stronger as you kill. The Witch Queen's lies and parasites become a weapon you can hold, and the player becomes part of her scheme.", zh: "它发射的是萨瓦图恩自己的蠕虫，你杀得越多它就越强。邪姬的谎言与寄生成为你可以握在手里的武器，玩家也成为她计划的一部分。" }),
+
+    /* awoken */
+    W("awoken", "Wish-Ender", "碎愿者", "Combat Bow", "战斗弓箭", 1, "814876684.jpg",
+      "“Don't fret. It's a simple expedition. We'll be back before lunch.” —Sjur Eido, First Queen's Wrath", "“别担心，不过是次简单的勘察。我们午饭前就回来。”——第一位女王之怒，苏尔·艾多",
+      { en: "A long bow in pale stone, engraved metal and cold blue light. Awoken objects favour vertical lines and restrained ornament, elegant but austere.", zh: "一张由苍白石头、雕刻金属和冷蓝色光构成的长弓。觉醒者的物件偏爱垂直线和克制的装饰，优雅而朴素。" },
+      { en: "Tied to Sjur Eido, a legendary Awoken warrior, and the curse of the Dreaming City. Its arrows see through walls, a fitting power for a people who live behind veils and secrets.", zh: "与传奇觉醒者战士苏尔·艾多以及幽梦之城的诅咒有关。它的箭可以透视墙壁，这种能力很适合一个生活在面纱与秘密背后的民族。" }),
+    W("awoken", "One Thousand Voices", "千语", "Fusion Rifle", "融合步枪", 3, "2069224589.jpg",
+      "I can be anyone you wish, o murderer mine.", "我可以成为你希望的任何人，哦，我的谋害者。",
+      { en: "A weapon fused with dragon bone and gold, with an organic, almost skeletal silhouette. It fires one long beam that ends in a chain of explosions.", zh: "一把与龙骨和黄金融合的武器，带着有机的、几乎是骨骼般的剪影。它发射一道长长的光束，末端是一连串爆炸。" },
+      { en: "Forged from the remains of Riven, the Ahamkara wish-dragon killed in the Last Wish raid. Its flavor speaks in Riven's voice, so the weapon remembers who it was made from. Ahamkara are always speaking, even in death.", zh: "由在“最后一愿”突袭中被杀死的阿罕卡拉许愿龙魅痕的遗骸锻造而成。它的风味文字用魅痕的口吻说话，所以这把武器记得自己是用谁做的。阿罕卡拉总是在说话，即使死后也是。" }),
+    W("awoken", "Ager's Scepter", "阿格尔的权杖", "Trace Rifle", "追踪步枪", 6, "1833195496.jpg",
+      "“One day, you will mold the world to your liking, dear brother, as I always have.” —Queen Mara Sov", "“亲爱的弟弟，有一天你也会像我一样，依照自己的喜好来塑造这个世界。”——玛拉·索维女王",
+      { en: "A regal Stasis weapon: crystalline blue, sharp facets, the look of a sceptre more than a gun. Crystals are 'geometry that grows', halfway between organic and impossible.", zh: "一把王者气派的冰影武器：晶体般的蓝色、锐利的切面，看起来更像权杖而不是枪。晶体是“会生长的几何”，介于有机与不可能之间。" },
+      { en: "Its flavor is Mara Sov speaking to her brother Uldren, who became Crow. Stasis is the Darkness power of control, and a sceptre is the symbol of rule: the design ties the Awoken royal family to the idea of shaping the world.", zh: "风味文字是玛拉·索维对弟弟欧顿（后来成为乌鸦）说的话。冰影是象征控制的暗影之力，而权杖是统治的象征：这个设计把觉醒者王室与“塑造世界”的观念连在了一起。" }),
+
+    /* machine */
+    W("machine", "Sleeper Simulant", "睡者之吼", "Linear Fusion Rifle", "线性融合步枪", 3, "4036115577.jpg",
+      "Subroutine IKELOS: Status=complete. MIDNIGHT EXIGENT: Status=still in progress.", "子程序似像者：状态=完成。午夜诉求：状态=仍在进行。",
+      { en: "Long, white and military, with red markings and clean hard-surface panels. It looks like Golden Age defence hardware, which is what it is.", zh: "修长、白色、军用，带着红色标记和干净的硬表面面板。它看起来像黄金时代的防御装备，而它确实就是。" },
+      { en: "Linked to Rasputin, the Warmind, and his IKELOS projects. The flavor text is a status report: the weapon speaks in the voice of a machine that is still running a war plan written centuries ago.", zh: "与战争思维拉斯普廷及其“似像者”（IKELOS）项目相关。风味文字是一份状态报告：这把武器用一台机器的声音说话，而那台机器仍在执行几个世纪前写下的作战计划。" }),
+    W("machine", "Outbreak Perfected", "全面爆发", "Pulse Rifle", "脉冲步枪", 1, "400096939.jpg",
+      "~directive = KILL while enemies = PRESENT: execute(directive)~", "~指令=击杀 当敌人=出现：执行（指令）~",
+      { en: "Red nanite veins spread over a rifle body, like an infection made visible. The pattern is organic, but the substance is machine.", zh: "红色的纳米机械脉络蔓延在枪身上，像被可视化的感染。图案是有机的，物质却是机器。" },
+      { en: "Built from SIVA, a Golden Age nanotechnology that can build anything and, once corrupted, consumes everything. Its flavor is literally code. It is Destiny's clearest image of technology that grows like a disease.", zh: "由 SIVA 制成，这是一种可以建造任何东西、一旦失控就吞噬一切的黄金时代纳米技术。它的风味文字就是一段代码。它是《命运》里最清楚的“像疾病一样生长的科技”的意象。" }),
+    W("machine", "Eyes of Tomorrow", "明日之眼", "Rocket Launcher", "火箭发射器", 3, "2399110176.jpg",
+      "“I want to see it all, unhindered, and know it's mine to take.” —Clovis Bray", "“我想不受阻拦地看到所有的一切，并明确我能得到这一切。”——克洛维斯·布瑞",
+      { en: "Braytech design: precise, expensive-looking, white and metallic with a large sensor 'eye'. It fires a volley of rockets that track several targets at once.", zh: "布瑞科技式的设计：精确、看起来很昂贵、白色与金属质感，配着一只巨大的传感器“眼睛”。它会发射一轮能同时追踪多个目标的火箭。" },
+      { en: "From the Deep Stone Crypt raid on Europa, and quoting Clovis Bray, the man who made the Exos. The weapon's 'eye' matches his hunger to see and own everything: corporate ambition turned into a weapon.", zh: "来自木卫二的深岩墓室突袭，并引用了制造 Exo 的克洛维斯·布瑞的话。武器的“眼睛”对应着他想看见并占有一切的欲望：企业野心变成了武器。" }),
+    W("machine", "Cloudstrike", "云霄破击", "Sniper Rifle", "狙击步枪", 2, "2603483885.jpg",
+      "They return to moons devoid. Their eyes searching. It's just begun. Meet this storm of sound and fury, till thunder-clashes fade to silence.", "他们回到了不存在的卫星上。他们的眼睛搜寻着。这只是个开始。迎接这场声势浩大的风暴，直到雷霆的冲击归于沉寂。",
+      { en: "A sniper rifle that calls down lightning, with angular white panels and electric blue. Arc's colour turns a precise tool into a storm.", zh: "一把能召唤雷电的狙击步枪，棱角分明的白色面板配电光蓝。电弧的颜色把一件精密工具变成了一场风暴。" },
+      { en: "Found on Europa in Beyond Light. The storm imagery matches the moon's endless blizzards, and the flavor poem's 'moons devoid' points to the empty Braytech facilities waiting under the ice.", zh: "在《凌光之刻》的木卫二上获得。风暴意象呼应了这颗卫星无尽的暴风雪，风味诗里“不存在的卫星”指向冰层下等待着的空荡布瑞科技设施。" }),
+
+    /* vex */
+    W("vex", "Vex Mythoclast", "Vex揭秘者", "Fusion Rifle", "融合步枪", 3, "4289226715.jpg",
+      "…a causal loop within the weapon's mechanism, suggesting that the firing process somehow binds space and time into…", "…武器机械装置内的一个因果环链，表明开火过程以某种方式把空间和时间结合成…",
+      { en: "Vex design language on a gun: bronze, white and gold plates fitted together like a puzzle, with milky radiolarian fluid glowing inside. Symmetric, segmented, unknowable.", zh: "枪上的 Vex 设计语言：青铜、白色与金色的板块像拼图一样组合，内部发光的是乳白色的放射虫流体。对称、分段、不可知。" },
+      { en: "From the Vault of Glass, the Vex's time-bending raid. The flavor text cuts off mid-sentence, as if the scholar studying it never finished. The weapon is a fragment of a mind that thinks across time.", zh: "来自玻璃拱顶，Vex 弯曲时间的突袭。风味文字在句子中间断掉，仿佛研究它的学者没能写完。这把武器是一个跨越时间思考的心智的碎片。" }),
+    W("vex", "No Time to Explain", "无时辩解", "Pulse Rifle", "脉冲步枪", 1, "1594120904.jpg",
+      "A single word etched onto the inside of the weapon's casing: Now.", "这件武器的外壳上深深地刻着两个字：马上。",
+      { en: "A pulse rifle that opens small time portals, which fire back extra bullets. Vex geometry is attached to a human gun, like a device someone brought back from the future.", zh: "一把会打开小型时间传送门的脉冲步枪，传送门会额外射出子弹。Vex 的几何被附加在一把人类的枪上，像是有人从未来带回来的装置。" },
+      { en: "The name echoes the Exo Stranger's famous line in the first Destiny. The single word 'Now' etched inside is a perfect time-travel joke: urgency from someone who has already seen what happens next.", zh: "名字呼应了初代《命运》里 Exo陌客的名言。刻在内部的那个词“马上”是一个完美的时间旅行笑话：来自一个已经看过接下来会发生什么的人的急迫。" }),
+    W("vex", "Vexcalibur", "维王者之剑", "Glaive", "偃月", 4, "3118061005.jpg",
+      "And they came to a lake fair and broad. “Lo,” said the voice, “yonder is the blade that I spoke of.”", "于是他们来到一个美丽宽阔的湖边。“瞧，”那声音说道，“我说过的那把剑就在那里。”",
+      { en: "A glaive built from Vex segments and cyan light, a blade-staff of floating geometric parts. It is pure Vex: modular, symmetric, cold.", zh: "一把由 Vex 部件和青色光芒构成的偃月，一柄由漂浮几何零件组成的刃杖。它是纯粹的 Vex：模块化、对称、冰冷。" },
+      { en: "Its name and flavor parody the legend of Excalibur and the Lady of the Lake. Destiny loves mixing myth with science fiction, and here a medieval legend becomes a Vex simulation.", zh: "它的名字和风味文字戏仿了亚瑟王的圣剑与湖中仙女的传说。《命运》喜欢把神话与科幻混在一起，在这里，中世纪传说变成了一次 Vex 模拟。" }),
+    W("vex", "Divinity", "神圣裁决", "Trace Rifle", "追踪步枪", 2, "4103414242.jpg",
+      "Calibrate reality. Seek inevitability. Embody divinity.", "校准现实。寻求必然。承载神威。",
+      { en: "Dark metal and gold in long parallel rails, closer to a scientific instrument than a gun. Its beam traps the target in a glowing cage.", zh: "深色金属与金色组成的长条平行导轨，与其说是枪，不如说更像一台科学仪器。它的光束会把目标困在一个发光的牢笼里。" },
+      { en: "From the Garden of Salvation, the Vex raid in the Black Garden where the machines worship the Pyramid. The flavor reads like Vex scripture: calibrate, seek, embody. Machines reaching for godhood.", zh: "来自救赎花园，也就是黑暗花园里 Vex 崇拜金字塔的突袭。风味文字读起来像 Vex 的经文：校准、寻求、承载。追求神性的机器。" }),
+
+    /* cabal */
+    W("cabal", "Legend of Acrius", "阿克瑞斯传说", "Shotgun", "霰弹枪", 2, "1744115122.jpg",
+      "“In the Cabal legend, a hero seeks to possess the sun. He succeeds. Then, he becomes Emperor. The Cabal… are not a subtle people.” —Tyra Karn", "“在卡巴尔传说中，一名英雄试图占有太阳。他成功了。接着，他就加冕成为皇帝。卡巴尔们……并不拘小节。”——泰拉·卡恩",
+      { en: "A massive, ornate shotgun in brass and dark metal. Thick plates and ceremonial detail, scaled for a Cabal hand. Its size alone tells you who it was made for.", zh: "一把巨大而华丽的霰弹枪，黄铜与深色金属构成。厚重的板材和仪式性的细节，尺寸是为卡巴尔的手设计的。光是体量就告诉你它是为谁而造。" },
+      { en: "From the Leviathan, Emperor Calus's pleasure ship. The flavor jokes that the Cabal 'are not a subtle people', which is exactly their art direction: big, heavy, gold, unambiguous.", zh: "来自卡鲁斯皇帝的享乐之舰利维坦。风味文字调侃卡巴尔“并不拘小节”，而这恰好就是他们的美术方向：巨大、沉重、金色、毫不含糊。" }),
+    W("cabal", "Leviathan's Breath", "利维坦之息", "Combat Bow", "战斗弓箭", 4, "2591746970.jpg",
+      "“Cast a Shadow over the wilds of this universe. Return with glorious trophies.” —Emperor Calus", "“为这个宇宙的荒野蒙上一层阴影。带着光荣的战利品归来。”——卡鲁斯大帝",
+      { en: "An enormous, heavy bow in gold and dark plates, the opposite of a light hunting bow. Every surface shows wealth.", zh: "一张巨大而沉重的弓，由金色与深色板甲构成，与轻巧的猎弓正好相反。每一个表面都在展示财富。" },
+      { en: "A hunting weapon for Calus's 'Shadows', the champions he sends to collect trophies. It is decadence as a design style, the same gilded taste as his ship.", zh: "卡鲁斯为他的“影子”准备的狩猎武器，他派这些勇士去收集战利品。这是作为设计风格的颓废，与他那艘船一样的镀金品味。" }),
+    W("cabal", "Skyburner's Oath", "焚天者誓约", "Scout Rifle", "斥候步枪", 3, "4255268456.jpg",
+      "The inscription, written in a Cabal dialect, reads: “Inexorable victory.”", "这句卡巴尔语铭文意为：“不可阻挡的胜利”。",
+      { en: "Chunky, armored and red, with the blocky proportions of Cabal war machines. It fires explosive rounds and feels like an artillery piece shrunk down.", zh: "粗壮、装甲化、红色，带着卡巴尔战争机器的方块比例。它发射爆炸弹，感觉像一门被缩小了的火炮。" },
+      { en: "Named for the Skyburners, an elite Cabal legion. A military empire writes 'inexorable victory' on its weapons: the inscription and the blunt design say the same thing.", zh: "以卡巴尔精锐军团“焚天者”命名。一个军事帝国在武器上写下“不可阻挡的胜利”：铭文与直白的设计说的是同一件事。" }),
+
+    /* dark */
+    W("dark", "Ruinous Effigy", "毁灭雕像", "Trace Rifle", "追踪步枪", 4, "1363238943.jpg",
+      "From the many wings of ruin blows a wind that will reshape this dead world.", "破败之飞翼横扫，唤世之狂风天冲。俯瞰衰亡之世界，重塑繁盛之星空。",
+      { en: "A pale, carved body with a glowing violet core, like a fragment of a statue that is still alive inside. Hard white planes against unstable purple light.", zh: "苍白的雕刻机身，中央是发光的紫色核心，像一块内部仍然活着的雕像碎片。坚硬的白色平面对上不稳定的紫色光。" },
+      { en: "Arrived with the Pyramid ships at Io in Season of Arrivals, the moment the Darkness came back. The word 'effigy' says it is an image of something else: a weapon modelled on a power the player does not yet understand.", zh: "随“抵达赛季”中出现在木卫一的金字塔舰船一同到来，那是黑暗回归的时刻。“雕像”一词说明它是某种东西的形象：一把仿照玩家尚不理解的力量而造的武器。" }),
+    W("dark", "Collective Obligation", "集体义务", "Pulse Rifle", "脉冲步枪", 4, "3505113722.jpg",
+      "“What The Witness gave me, I give to you. May it serve you in death, or in finality. It cannot be both.” —Rhulk, disciple of the Witness", "“见证者给我的，我也给你。愿它在你死亡后或既定后为你效力。二者只能居其一。”——胡克，见证者门徒",
+      { en: "Liquid chrome: flowing silver forms with no seams, no screws, no visible way it was built. This is the Pyramid's material, which looks poured rather than made.", zh: "液态铬：流动的银色形体，没有接缝、没有螺丝，看不出它是怎么造出来的。这是金字塔的材质，看起来是“浇铸”出来的而不是制造出来的。" },
+      { en: "A gift from Rhulk, the Witness's disciple, in the Vow of the Disciple raid. It steals Darkness verbs from enemies. Its seamless surface makes the Witness's idea of perfection tangible: an object with no history of being made.", zh: "来自“门徒誓约”突袭中见证者的门徒胡克。它能从敌人身上窃取暗影效果。它无缝的表面让见证者的“完美”变得可以触摸：一件没有被制造痕迹的物件。" }),
+    W("dark", "Deterministic Chaos", "命定混沌", "Machine Gun", "机枪", 4, "449318888.jpg",
+      "“So all being is a one and only being; and that it continues to be when someone dies, tells you, that he did not cease to be.” —Schrodinger's epitaph", "“所有的存在都是独一无二的；当一个人死去时，它依然会存在，告诉着你，他并没有离开。”——薛定谔的墓志铭",
+      { en: "Pale chrome and stone with a purple diamond lattice along the body and a brass drum. The lattice is a grid pressed onto a living-looking surface.", zh: "苍白的铬面与石质，枪身上有紫色的菱形网格，还有一个黄铜弹鼓。这些网格像是被压印在一个看似活着的表面上的格子。" },
+      { en: "Its name pairs two opposites, fate and chance, and its flavor quotes the physicist Schrödinger on being and death. It is a small essay on the Witness's question: is the universe fixed, or still open?", zh: "它的名字把两个对立的概念放在一起：命定与混沌；风味文字引用了物理学家薛定谔关于存在与死亡的话。它是一篇关于见证者之问的小文章：宇宙是已被决定的，还是仍然开放的？" }),
+    W("dark", "Conditional Finality", "条件终局", "Shotgun", "霰弹枪", 6, "3371017761.jpg",
+      "You will dream of me… I will never leave you…", "你会梦见我…我永远不会离开你…",
+      { en: "A split, two-barrelled shotgun: one side icy blue, one side burning orange. It fires Stasis and Solar together, so the design is literally a duality.", zh: "一把分叉的双管霰弹枪：一边冰蓝，一边燃烧的橙色。它同时发射冰影与烈日，所以这个设计字面上就是“二元”。" },
+      { en: "From the Root of Nightmares raid against Nezarec, a disciple of the Witness who feeds on fear. The flavor is his voice whispering from inside your dreams: the nightmare that never leaves.", zh: "来自对抗奈扎雷克的“梦魇根源”突袭，奈扎雷克是以恐惧为食的见证者门徒。风味文字是他在你梦里低语的声音：永不离开的梦魇。" }),
+    W("dark", "Tessellation", "细分曲面", "Fusion Rifle", "融合步枪", 1, "3561203890.jpg",
+      "The monolith is hewn; the monument is built.", "巨石就此凿开；纪念碑随即建成。",
+      { en: "An iridescent, oil-slick shell over dark talons and feathered blades. Light and dark, smooth and spiked, combined in one object.", zh: "一层虹彩般、像油膜一样的外壳覆盖在深色的利爪与羽状刀刃上。光与暗、光滑与尖刺，被组合在一件物件里。" },
+      { en: "A Final Shape-era weapon tied to Prismatic, the power that combines Light and Darkness. Tessellation means tiling a surface with shapes, and the flavor speaks of hewing a monolith: a weapon that borrows the Witness's geometry to fight it.", zh: "一把与“棱镜”相关的终焉之形时代武器，棱镜是结合光能与暗影的力量。“细分曲面”指用形状铺满一个表面，风味文字说的是凿开巨石：一把借用见证者的几何来对抗它的武器。" }),
+    W("dark", "Ergo Sum", "故我在", "Sword", "刀剑", 1, "1681583613.jpg",
+      "Silent. Silent. Silent.", "无声。安静。沉寂。",
+      { en: "A pale, simple blade with a ribbed hilt and a single hooked guard. It is spare, almost monastic, compared to other exotics.", zh: "一把苍白、简单的刀，带着肋状的刀柄和一个弯钩状护手。与其他异域武器相比，它显得简省，几乎带着修道院般的气质。" },
+      { en: "Its name comes from 'I think, therefore I am'. In a campaign about a being that wants to erase individuality, a sword named for the proof of the self is a quiet answer. Its random traits mean no two are the same.", zh: "它的名字来自“我思故我在”。在一个关于想要抹除个体性的存在的战役里，一把以“自我存在的证明”命名的剑是一个安静的回答。它的随机特性意味着没有两把是一样的。" }),
+    W("dark", "Euphony", "悦耳之声", "Linear Fusion Rifle", "线性融合步枪", 7, "3284383335.jpg",
+      "Perhaps The Final Shape is not silence, it is a symphony.", "也许终焉之形不是沉寂，而是交响乐。",
+      { en: "Black and blood-red with green Strand threads streaming from the barrel, like strings on an instrument. Organic red tendrils wrap a hard black frame.", zh: "黑色与血红色，绿色的缚丝线条从枪管中流出，像乐器上的琴弦。有机的红色卷须缠绕着坚硬的黑色框架。" },
+      { en: "From Salvation's Edge, the raid inside the Witness's monolith. Its flavor turns the Witness's idea upside down: the final shape is not silence but harmony, many voices together. It is the series' thesis in one line.", zh: "来自“救赎的边缘”，也就是见证者巨石内部的突袭。它的风味文字把见证者的想法倒了过来：终焉之形不是沉寂，而是和声，是许多声音在一起。这是整个系列的主旨，浓缩成一句话。" }),
+
+    /* new */
+    W("new", "Quicksilver Storm", "瞬变风暴", "Auto Rifle", "自动步枪", 1, "4293613902.jpg",
+      "Three words. Carved by hand: Affinity. Altruism. Awareness.", "手刻了三个词：亲缘。利他。认知。",
+      { en: "A sleek rifle with a hidden grenade launcher, finished in bright, clean futuristic panels. Lightfall's design language: optimistic, fast, polished.", zh: "一把内置隐藏式榴弹发射器的流线型步枪，表面是明亮、干净的未来感面板。这是《光陨之秋》的设计语言：乐观、快速、精致。" },
+      { en: "Its three hand-carved words describe Strand, the power of connection that arrived with Lightfall. A weapon that names values rather than threats is unusual in Destiny.", zh: "那三个手刻的词描述的是缚丝，也就是随《光陨之秋》到来的连接之力。在《命运》里，一把写着价值观而不是威胁的武器很少见。" }),
+    W("new", "Final Warning", "最终警告", "Sidearm", "手枪", 7, "3121540812.jpg",
+      "The flit of tiny wings; the pull of a trigger.", "细翼掠过；扣动扳机。",
+      { en: "A Strand sidearm whose rounds track and split, threaded with green light. Small and quick, its look matches its fast, nimble handling.", zh: "一把缚丝手枪，子弹会追踪并分裂，缠绕着绿色的光。小巧而快速，外观与它灵活的手感相符。" },
+      { en: "Strand is drawn as green threads and woven patterns, the visual idea of the web that connects all living things. The tiny wings in the flavor text tie it to the moths and birds of the Veil.", zh: "缚丝被画成绿色的丝线和编织图案，是“连接一切生命之网”的视觉表达。风味文字里的细小翅膀把它与面纱中的飞蛾和飞鸟联系在一起。" }),
+    W("new", "Microcosm", "缩影", "Trace Rifle", "追踪步枪", 1, "4207066264.jpg",
+      "We all owe our existence to one singular moment, long ago.", "我们的存在都要归功于很久以前的一个独特时刻。",
+      { en: "A pale, organic heavy weapon pierced with round holes, with curving prongs like ribs. It looks grown from the same material as the Traveler.", zh: "一把苍白、有机的重型武器，表面布满圆孔，弯曲的尖刺像肋骨。它看起来是用和旅行者相同的材料长出来的。" },
+      { en: "From The Final Shape, found inside the Traveler. Its flavor points to the 'singular moment' of creation, the Big Bang or the Traveler's own birth. A weapon about origins, at the end of the story.", zh: "来自《终焉之形》，在旅行者内部获得。风味文字指向创世的“独特时刻”，可以是宇宙大爆炸，也可以是旅行者自身的诞生。在故事的结尾，一把关于起源的武器。" }),
+    W("new", "Praxic Blade", "英勇利刃", "Sword", "刀剑", 1, "3049715579.jpg",
+      "A Weapon of Hope, to cut a line between Light and Dark.", "一件代表希望的武器，用来在光明与黑暗之间划开一道界线。",
+      { en: "A glowing green energy blade on a ridged metal hilt. The silhouette is borrowed from the laser sword, translated into Destiny's materials and colours.", zh: "一把发着绿光的能量刃，配着带纹路的金属剑柄。这个剪影借自光剑，又被翻译成了《命运》的材质与色彩。" },
+      { en: "From Renegades, the Star Wars collaboration. Its flavor reframes the saber in Destiny's own terms: not a Jedi weapon but a line between Light and Dark, the same boundary the whole series is about.", zh: "来自与《星球大战》合作的《反叛》。它的风味文字用《命运》自己的语言重新诠释了光剑：不是绝地武器，而是光明与黑暗之间的一道线，也就是整个系列所关注的那条边界。" })
+  ];
+
+  window.ARMS = { SHOT: SHOT, DMG: DMG, FOUNDRIES: FOUNDRIES, FAMILIES: FAMILIES, EXOTICS: EXOTICS };
+
+  /* register exotics in ART_INDEX so the shared viewer can open them */
+  window.XCH = window.XCH || [];
+  window.XCH.push({ id: "arsenal", year: "2017–2025", name: { en: "Arsenal", zh: "武器库" }, blast: "https://www.bungie.net/7/en/Destiny" });
+  window.ART_INDEX = window.ART_INDEX || {};
+  EXOTICS.forEach(function (w, i) {
+    w.id = "WX" + (i + 1);
+    window.ART_INDEX[w.id] = { id: w.id, chapter: "arsenal", img: SHOT + w.s, artist: "Bungie", handle: "", link: "https://www.bungie.net/7/en/Destiny",
+      title: { en: w.n, zh: w.zh }, how: w.how, story: w.story, flavor: w.flavor, type: w.t, dmg: w.d };
+  });
+})();
